@@ -41,8 +41,6 @@ class FlavorConfig {
         return development;
       case Flavor.production:
         return production;
-      default:
-        return development;
     }
   }
 }

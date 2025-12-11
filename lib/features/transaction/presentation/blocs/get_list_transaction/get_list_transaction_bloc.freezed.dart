@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'get_agent_bloc.dart';
+part of 'get_list_transaction_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$GetAgentEvent {
+mixin _$GetListTransactionEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
@@ -51,16 +51,17 @@ mixin _$GetAgentEvent {
 }
 
 /// @nodoc
-abstract class $GetAgentEventCopyWith<$Res> {
-  factory $GetAgentEventCopyWith(
-          GetAgentEvent value, $Res Function(GetAgentEvent) then) =
-      _$GetAgentEventCopyWithImpl<$Res, GetAgentEvent>;
+abstract class $GetListTransactionEventCopyWith<$Res> {
+  factory $GetListTransactionEventCopyWith(GetListTransactionEvent value,
+          $Res Function(GetListTransactionEvent) then) =
+      _$GetListTransactionEventCopyWithImpl<$Res, GetListTransactionEvent>;
 }
 
 /// @nodoc
-class _$GetAgentEventCopyWithImpl<$Res, $Val extends GetAgentEvent>
-    implements $GetAgentEventCopyWith<$Res> {
-  _$GetAgentEventCopyWithImpl(this._value, this._then);
+class _$GetListTransactionEventCopyWithImpl<$Res,
+        $Val extends GetListTransactionEvent>
+    implements $GetListTransactionEventCopyWith<$Res> {
+  _$GetListTransactionEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -77,7 +78,7 @@ abstract class _$$FetchImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$FetchImplCopyWithImpl<$Res>
-    extends _$GetAgentEventCopyWithImpl<$Res, _$FetchImpl>
+    extends _$GetListTransactionEventCopyWithImpl<$Res, _$FetchImpl>
     implements _$$FetchImplCopyWith<$Res> {
   __$$FetchImplCopyWithImpl(
       _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
@@ -91,7 +92,7 @@ class _$FetchImpl implements _Fetch {
 
   @override
   String toString() {
-    return 'GetAgentEvent.fetch()';
+    return 'GetListTransactionEvent.fetch()';
   }
 
   @override
@@ -160,36 +161,38 @@ class _$FetchImpl implements _Fetch {
   }
 }
 
-abstract class _Fetch implements GetAgentEvent {
+abstract class _Fetch implements GetListTransactionEvent {
   const factory _Fetch() = _$FetchImpl;
 }
 
 /// @nodoc
-mixin _$GetAgentState {
-  GetAgentStatus get status => throw _privateConstructorUsedError;
-  AgentModel? get data => throw _privateConstructorUsedError;
+mixin _$GetListTransactionState {
+  GetListTransactionStatus get status => throw _privateConstructorUsedError;
+  List<RentTransactionModel>? get data => throw _privateConstructorUsedError;
   Object? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $GetAgentStateCopyWith<GetAgentState> get copyWith =>
+  $GetListTransactionStateCopyWith<GetListTransactionState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetAgentStateCopyWith<$Res> {
-  factory $GetAgentStateCopyWith(
-          GetAgentState value, $Res Function(GetAgentState) then) =
-      _$GetAgentStateCopyWithImpl<$Res, GetAgentState>;
+abstract class $GetListTransactionStateCopyWith<$Res> {
+  factory $GetListTransactionStateCopyWith(GetListTransactionState value,
+          $Res Function(GetListTransactionState) then) =
+      _$GetListTransactionStateCopyWithImpl<$Res, GetListTransactionState>;
   @useResult
-  $Res call({GetAgentStatus status, AgentModel? data, Object? error});
-
-  $AgentModelCopyWith<$Res>? get data;
+  $Res call(
+      {GetListTransactionStatus status,
+      List<RentTransactionModel>? data,
+      Object? error});
 }
 
 /// @nodoc
-class _$GetAgentStateCopyWithImpl<$Res, $Val extends GetAgentState>
-    implements $GetAgentStateCopyWith<$Res> {
-  _$GetAgentStateCopyWithImpl(this._value, this._then);
+class _$GetListTransactionStateCopyWithImpl<$Res,
+        $Val extends GetListTransactionState>
+    implements $GetListTransactionStateCopyWith<$Res> {
+  _$GetListTransactionStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -207,48 +210,39 @@ class _$GetAgentStateCopyWithImpl<$Res, $Val extends GetAgentState>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as GetAgentStatus,
+              as GetListTransactionStatus,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as AgentModel?,
+              as List<RentTransactionModel>?,
       error: freezed == error ? _value.error : error,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AgentModelCopyWith<$Res>? get data {
-    if (_value.data == null) {
-      return null;
-    }
-
-    return $AgentModelCopyWith<$Res>(_value.data!, (value) {
-      return _then(_value.copyWith(data: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$GetAgentStateImplCopyWith<$Res>
-    implements $GetAgentStateCopyWith<$Res> {
-  factory _$$GetAgentStateImplCopyWith(
-          _$GetAgentStateImpl value, $Res Function(_$GetAgentStateImpl) then) =
-      __$$GetAgentStateImplCopyWithImpl<$Res>;
+abstract class _$$GetListTransactionStateImplCopyWith<$Res>
+    implements $GetListTransactionStateCopyWith<$Res> {
+  factory _$$GetListTransactionStateImplCopyWith(
+          _$GetListTransactionStateImpl value,
+          $Res Function(_$GetListTransactionStateImpl) then) =
+      __$$GetListTransactionStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({GetAgentStatus status, AgentModel? data, Object? error});
-
-  @override
-  $AgentModelCopyWith<$Res>? get data;
+  $Res call(
+      {GetListTransactionStatus status,
+      List<RentTransactionModel>? data,
+      Object? error});
 }
 
 /// @nodoc
-class __$$GetAgentStateImplCopyWithImpl<$Res>
-    extends _$GetAgentStateCopyWithImpl<$Res, _$GetAgentStateImpl>
-    implements _$$GetAgentStateImplCopyWith<$Res> {
-  __$$GetAgentStateImplCopyWithImpl(
-      _$GetAgentStateImpl _value, $Res Function(_$GetAgentStateImpl) _then)
+class __$$GetListTransactionStateImplCopyWithImpl<$Res>
+    extends _$GetListTransactionStateCopyWithImpl<$Res,
+        _$GetListTransactionStateImpl>
+    implements _$$GetListTransactionStateImplCopyWith<$Res> {
+  __$$GetListTransactionStateImplCopyWithImpl(
+      _$GetListTransactionStateImpl _value,
+      $Res Function(_$GetListTransactionStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -258,15 +252,15 @@ class __$$GetAgentStateImplCopyWithImpl<$Res>
     Object? data = freezed,
     Object? error = freezed,
   }) {
-    return _then(_$GetAgentStateImpl(
+    return _then(_$GetListTransactionStateImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as GetAgentStatus,
+              as GetListTransactionStatus,
       data: freezed == data
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as AgentModel?,
+              as List<RentTransactionModel>?,
       error: freezed == error ? _value.error : error,
     ));
   }
@@ -274,58 +268,73 @@ class __$$GetAgentStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetAgentStateImpl implements _GetAgentState {
-  const _$GetAgentStateImpl(
-      {this.status = GetAgentStatus.initial, this.data, this.error});
+class _$GetListTransactionStateImpl implements _GetListTransactionState {
+  const _$GetListTransactionStateImpl(
+      {this.status = GetListTransactionStatus.initial,
+      final List<RentTransactionModel>? data,
+      this.error})
+      : _data = data;
 
   @override
   @JsonKey()
-  final GetAgentStatus status;
+  final GetListTransactionStatus status;
+  final List<RentTransactionModel>? _data;
   @override
-  final AgentModel? data;
+  List<RentTransactionModel>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final Object? error;
 
   @override
   String toString() {
-    return 'GetAgentState(status: $status, data: $data, error: $error)';
+    return 'GetListTransactionState(status: $status, data: $data, error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetAgentStateImpl &&
+            other is _$GetListTransactionStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.data, data) || other.data == data) &&
+            const DeepCollectionEquality().equals(other._data, _data) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, status, data, const DeepCollectionEquality().hash(error));
+      runtimeType,
+      status,
+      const DeepCollectionEquality().hash(_data),
+      const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetAgentStateImplCopyWith<_$GetAgentStateImpl> get copyWith =>
-      __$$GetAgentStateImplCopyWithImpl<_$GetAgentStateImpl>(this, _$identity);
+  _$$GetListTransactionStateImplCopyWith<_$GetListTransactionStateImpl>
+      get copyWith => __$$GetListTransactionStateImplCopyWithImpl<
+          _$GetListTransactionStateImpl>(this, _$identity);
 }
 
-abstract class _GetAgentState implements GetAgentState {
-  const factory _GetAgentState(
-      {final GetAgentStatus status,
-      final AgentModel? data,
-      final Object? error}) = _$GetAgentStateImpl;
+abstract class _GetListTransactionState implements GetListTransactionState {
+  const factory _GetListTransactionState(
+      {final GetListTransactionStatus status,
+      final List<RentTransactionModel>? data,
+      final Object? error}) = _$GetListTransactionStateImpl;
 
   @override
-  GetAgentStatus get status;
+  GetListTransactionStatus get status;
   @override
-  AgentModel? get data;
+  List<RentTransactionModel>? get data;
   @override
   Object? get error;
   @override
   @JsonKey(ignore: true)
-  _$$GetAgentStateImplCopyWith<_$GetAgentStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$GetListTransactionStateImplCopyWith<_$GetListTransactionStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

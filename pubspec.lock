@@ -640,6 +640,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
+  pretty_bloc_observer:
+    dependency: "direct main"
+    description:
+      name: pretty_bloc_observer
+      sha256: "14fb6ba23f33e74e6953cf4328bdc2d2a788363f9e205ad8d52bc77a11c1fea5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
   pretty_dio_logger:
     dependency: "direct main"
     description:

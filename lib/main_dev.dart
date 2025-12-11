@@ -1,5 +1,5 @@
-import 'package:valoku_app/core/config/flavors.dart';
-import 'package:valoku_app/main.dart';
+import 'package:sewa_barang_client/core/config/flavors.dart';
+import 'package:sewa_barang_client/main.dart';
 
 Future<void> main() async {
   FlavorConfig(

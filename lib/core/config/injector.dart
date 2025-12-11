@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:valoku_app/core/config/injector.config.dart';
+import 'package:sewa_barang_client/core/config/injector.config.dart';
 import 'package:injectable/injectable.dart';
 
 const production = Environment('production');

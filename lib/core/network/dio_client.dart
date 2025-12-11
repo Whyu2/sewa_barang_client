@@ -5,8 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:valoku_app/core/config/flavors.dart';
-import 'package:valoku_app/core/network/network.dart';
+import 'package:sewa_barang_client/core/config/flavors.dart';
+import 'package:sewa_barang_client/core/network/network.dart';
 
 class DioClient {
   Function(

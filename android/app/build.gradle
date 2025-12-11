@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.valoku_app"
+    namespace "com.example.sewa_barang_client"
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -42,7 +42,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.sewa_barang_app"
+        applicationId "com.example.sewa_barang_client"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
@@ -55,12 +55,12 @@ android {
     productFlavors {
         development {
             dimension 'flavor-type'
-            applicationId 'com.example.sewa_barang_app.dev'
+            applicationId 'com.example.sewa_barang_client.dev'
             resValue 'string', 'app_name', 'Sewa Barang Dev'
         }
         production {
             dimension 'flavor-type'
-            applicationId 'com.example.sewa_barang_app'
+            applicationId 'com.example.sewa_barang_client'
             resValue 'string', 'app_name', 'Sewa Barang'
         }
     }

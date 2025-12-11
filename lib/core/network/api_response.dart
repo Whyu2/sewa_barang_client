@@ -1,9 +1,9 @@
-import 'package:valoku_app/core/network/list_result.dart';
+import 'package:sewa_barang_client/core/network/list_result.dart';
 
 /// API result model.
 class ApiResult<T> {
   /// Error message if any.
-  final int? status;
+  final bool? status;
 
   /// The response payload if any.
   final T? data;

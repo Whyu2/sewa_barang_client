@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:valoku_app/core/routers/routers.dart';
+import 'package:sewa_barang_client/core/routers/routers.dart';
 
-class ValoApp extends StatelessWidget {
-  const ValoApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {

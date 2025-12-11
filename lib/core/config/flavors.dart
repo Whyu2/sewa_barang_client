@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:valoku_app/core/config/injector.dart';
+import 'package:sewa_barang_client/core/config/injector.dart';
 
 enum Flavor {
   development,

@@ -11,9 +11,10 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../features/home/data/data_sources/agent_data_sources.dart' as _i3;
-import '../../features/home/data/data_sources/data_sources.dart' as _i5;
-import '../../features/home/data/repositories/agent_repository.dart' as _i4;
+import '../../features/transaction/data/data_sources/transaction_data_sources.dart'
+    as _i3;
+import '../../features/transaction/data/repositories/transaction_repository.dart'
+    as _i4;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -26,12 +27,12 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.singleton<_i3.AgentDataSource>(
-      () => _i3.AgentDataSourceImpl(),
+    gh.singleton<_i3.TransactionDataSource>(
+      () => _i3.TransactionDataSourceImpl(),
       signalsReady: true,
     );
-    gh.factory<_i4.AgentRepository>(
-        () => _i4.AgentRepository(gh<_i5.AgentDataSource>()));
+    gh.factory<_i4.TransactionRepository>(
+        () => _i4.TransactionRepository(gh<_i3.TransactionDataSource>()));
     return this;
   }
 }

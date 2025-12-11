@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:valoku_app/core/routers/routers.dart';
-import 'package:valoku_app/features/home/presentation/pages/home_page.dart';
+import 'package:sewa_barang_client/core/routers/routers.dart';
+import 'package:sewa_barang_client/features/home/presentation/pages/home_page.dart';
 
 List<GoRoute> _registerRoutes() {
   return [

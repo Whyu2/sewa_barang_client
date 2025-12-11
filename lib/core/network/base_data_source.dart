@@ -2,7 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:valoku_app/core/network/network.dart';
+import 'package:sewa_barang_client/core/network/network.dart';
 
 class BaseRemoteDataSource {
   Dio dio;

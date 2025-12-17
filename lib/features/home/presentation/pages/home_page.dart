@@ -32,10 +32,8 @@ class _HomePageContentState extends State<HomePageContent> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Home',
-            style: GoogleFonts.getFont('Anton'),
-          ),
+          forceMaterialTransparency: false,
+          primary: false,
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
@@ -45,7 +43,7 @@ class _HomePageContentState extends State<HomePageContent> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag),
+              icon: Icon(Icons.scanner),
               label: 'Sewa Barang',
             ),
             BottomNavigationBarItem(

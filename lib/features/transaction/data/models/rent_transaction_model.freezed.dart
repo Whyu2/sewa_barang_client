@@ -39,7 +39,7 @@ mixin _$RentTransactionModel {
   @JsonKey(name: 'return_date')
   DateTime? get returnDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'status')
-  String? get status => throw _privateConstructorUsedError;
+  RentTransactionStatus? get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'notes')
   String? get notes => throw _privateConstructorUsedError;
   @JsonKey(name: 'pickup_proof_url')
@@ -73,7 +73,7 @@ abstract class $RentTransactionModelCopyWith<$Res> {
       @JsonKey(name: 'qty') int qty,
       @JsonKey(name: 'expected_return_date') DateTime expectedReturnDate,
       @JsonKey(name: 'return_date') DateTime? returnDate,
-      @JsonKey(name: 'status') String? status,
+      @JsonKey(name: 'status') RentTransactionStatus? status,
       @JsonKey(name: 'notes') String? notes,
       @JsonKey(name: 'pickup_proof_url') String? pickupProofUrl,
       @JsonKey(name: 'return_proof_url') String? returnProofUrl,
@@ -154,7 +154,7 @@ class _$RentTransactionModelCopyWithImpl<$Res,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as RentTransactionStatus?,
       notes: freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -221,7 +221,7 @@ abstract class _$$RentTransactionModelImplCopyWith<$Res>
       @JsonKey(name: 'qty') int qty,
       @JsonKey(name: 'expected_return_date') DateTime expectedReturnDate,
       @JsonKey(name: 'return_date') DateTime? returnDate,
-      @JsonKey(name: 'status') String? status,
+      @JsonKey(name: 'status') RentTransactionStatus? status,
       @JsonKey(name: 'notes') String? notes,
       @JsonKey(name: 'pickup_proof_url') String? pickupProofUrl,
       @JsonKey(name: 'return_proof_url') String? returnProofUrl,
@@ -301,7 +301,7 @@ class __$$RentTransactionModelImplCopyWithImpl<$Res>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as RentTransactionStatus?,
       notes: freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -379,7 +379,7 @@ class _$RentTransactionModelImpl implements _RentTransactionModel {
   final DateTime? returnDate;
   @override
   @JsonKey(name: 'status')
-  final String? status;
+  final RentTransactionStatus? status;
   @override
   @JsonKey(name: 'notes')
   final String? notes;
@@ -480,7 +480,7 @@ abstract class _RentTransactionModel implements RentTransactionModel {
           @JsonKey(name: 'expected_return_date')
           required final DateTime expectedReturnDate,
           @JsonKey(name: 'return_date') final DateTime? returnDate,
-          @JsonKey(name: 'status') final String? status,
+          @JsonKey(name: 'status') final RentTransactionStatus? status,
           @JsonKey(name: 'notes') final String? notes,
           @JsonKey(name: 'pickup_proof_url') final String? pickupProofUrl,
           @JsonKey(name: 'return_proof_url') final String? returnProofUrl,
@@ -520,7 +520,7 @@ abstract class _RentTransactionModel implements RentTransactionModel {
   DateTime? get returnDate;
   @override
   @JsonKey(name: 'status')
-  String? get status;
+  RentTransactionStatus? get status;
   @override
   @JsonKey(name: 'notes')
   String? get notes;

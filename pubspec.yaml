@@ -48,6 +48,7 @@ dependencies:
   cached_network_image: ^3.4.1
   google_fonts: ^6.2.1
   pretty_bloc_observer: ^1.0.4
+  timeago: ^3.7.1
 
 dev_dependencies:
   build_runner: ^2.4.8

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sewa_barang_client/features/transaction/data/models/name_description_model.dart';
-import 'package:sewa_barang_client/features/transaction/data/models/product_model.dart';
+
+import 'models.dart';
 
 part 'rent_transaction_model.freezed.dart';
 part 'rent_transaction_model.g.dart';
@@ -18,7 +18,7 @@ class RentTransactionModel with _$RentTransactionModel {
     @JsonKey(name: 'qty') required int qty,
     @JsonKey(name: 'expected_return_date') required DateTime expectedReturnDate,
     @JsonKey(name: 'return_date') DateTime? returnDate,
-    @JsonKey(name: 'status') String? status,
+    @JsonKey(name: 'status') RentTransactionStatus? status,
     @JsonKey(name: 'notes') String? notes,
     @JsonKey(name: 'pickup_proof_url') String? pickupProofUrl,
     @JsonKey(name: 'return_proof_url') String? returnProofUrl,

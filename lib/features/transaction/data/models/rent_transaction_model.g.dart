@@ -21,7 +21,8 @@ _$RentTransactionModelImpl _$$RentTransactionModelImplFromJson(
       returnDate: json['return_date'] == null
           ? null
           : DateTime.parse(json['return_date'] as String),
-      status: json['status'] as String?,
+      status:
+          $enumDecodeNullable(_$RentTransactionStatusEnumMap, json['status']),
       notes: json['notes'] as String?,
       pickupProofUrl: json['pickup_proof_url'] as String?,
       returnProofUrl: json['return_proof_url'] as String?,
@@ -46,10 +47,15 @@ Map<String, dynamic> _$$RentTransactionModelImplToJson(
       'qty': instance.qty,
       'expected_return_date': instance.expectedReturnDate.toIso8601String(),
       'return_date': instance.returnDate?.toIso8601String(),
-      'status': instance.status,
+      'status': _$RentTransactionStatusEnumMap[instance.status],
       'notes': instance.notes,
       'pickup_proof_url': instance.pickupProofUrl,
       'return_proof_url': instance.returnProofUrl,
       'region': instance.region?.toJson(),
       'product': instance.product?.toJson(),
     };
+
+const _$RentTransactionStatusEnumMap = {
+  RentTransactionStatus.rented: 'rented',
+  RentTransactionStatus.done: 'done',
+};

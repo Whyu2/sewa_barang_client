@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sewa_barang_client/features/transaction/presentation/blocs/get_list_transaction/get_list_transaction_bloc.dart';
+import 'package:sewa_barang_client/features/transaction/presentation/widgets/transaction_list_item_card.dart';
 
 class TransactionScreen extends StatelessWidget {
   final GetListTransactionBloc getListTransactionBloc;
@@ -42,8 +43,15 @@ class _TransactionContentState extends State<TransactionContent> {
               child: Text(state.error.toString()),
             );
           }
-          return Center(
-            child: Text(state.data.toString()),
+
+          return ListView.builder(
+            itemCount: state.data!.length,
+            itemBuilder: (context, index) {
+              return TransactionListItemCard(
+                model: state.data![index],
+                onTap: () {},
+              );
+            },
           );
         }
         return const Center(

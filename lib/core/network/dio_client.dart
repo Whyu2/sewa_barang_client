@@ -4,10 +4,16 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:sewa_barang_client/core/config/flavors.dart';
+import 'package:sewa_barang_client/core/config/injector.dart';
 import 'package:sewa_barang_client/core/network/network.dart';
+import 'package:sewa_barang_client/features/auth/presentation/blocs/auth/auth_cubit.dart';
 
+import '../storage/scure_storage_service.dart';
+
+@singleton
 class DioClient {
   Function(
     String errorMsg,
@@ -54,12 +60,16 @@ class DioClient {
 
   InterceptorsWrapper interceptor() => InterceptorsWrapper(
         onRequest: (options, handler) async {
+          final token = await getIt<SecureStorageService>().getToken();
+          if (token != null) {
+            options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
+          }
           return handler.next(options);
         },
         onResponse: (response, handler) {
           return handler.next(response);
         },
-        onError: (err, handler) {
+        onError: (err, handler) async {
           String msg;
           DioExceptions? dioException;
           dioException = DioExceptions.fromDioError(err);
@@ -71,6 +81,13 @@ class DioClient {
               err.response?.statusCode,
               dioException,
             );
+          }
+
+          debugPrint(err.toString());
+
+          if (err.response?.statusCode == 401) {
+            debugPrint('xxxx');
+            await getIt<AuthCubbit>().unAuthenticated();
           }
 
           return handler.next(err);

@@ -15,12 +15,12 @@ abstract class TransactionDataSource extends BaseRemoteDataSource {
   Future<ApiResult<RentTransactionModel>> getTransaction();
 }
 
-@Singleton(signalsReady: true, as: TransactionDataSource)
+@Singleton(as: TransactionDataSource)
 class TransactionDataSourceImpl extends BaseRemoteDataSource
     implements TransactionDataSource {
-  TransactionDataSourceImpl()
+  TransactionDataSourceImpl(DioClient dioClient)
       : super(
-          dio: DioClient().dio,
+          dio: dioClient.dio,
           apiBaseUrl: FlavorConfig.instance!.flavorValues.baseUrl,
         );
 

@@ -12,7 +12,6 @@ class ProductModel with _$ProductModel {
     @JsonKey(name: 'category_id') required int categoryId,
     @JsonKey(name: 'category_name') required String categoryName,
     @JsonKey(name: 'qty') required int qty,
-    @JsonKey(name: 'rent_price') required int rentPrice,
     @JsonKey(name: 'qr_code_url') required String qrCodeUrl,
     @JsonKey(name: 'qr_uuid') required String qrUuid,
     @JsonKey(name: 'photo_url') required String? photoUrl,

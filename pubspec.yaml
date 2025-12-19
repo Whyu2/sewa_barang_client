@@ -49,6 +49,9 @@ dependencies:
   google_fonts: ^6.2.1
   pretty_bloc_observer: ^1.0.4
   timeago: ^3.7.1
+  formz: ^0.4.1
+  loader_overlay: ^2.2.0
+  flutter_secure_storage: ^8.1.0
 
 dev_dependencies:
   build_runner: ^2.4.8

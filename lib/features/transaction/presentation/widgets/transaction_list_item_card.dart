@@ -50,8 +50,7 @@ class TransactionListItemCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  StringUtil.formatCurrencyIdr(
-                      model.product?.rentPrice.toDouble() ?? 0),
+                  StringUtil.formatCurrencyIdr(model.rentPrice.toDouble()),
                   style: const TextStyle(
                       color: Colors.blue,
                       fontSize: 20,

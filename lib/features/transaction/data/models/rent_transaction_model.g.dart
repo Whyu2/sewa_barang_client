@@ -18,6 +18,7 @@ _$RentTransactionModelImpl _$$RentTransactionModelImplFromJson(
       qty: (json['qty'] as num).toInt(),
       expectedReturnDate:
           DateTime.parse(json['expected_return_date'] as String),
+      rentPrice: (json['rent_price'] as num).toInt(),
       returnDate: json['return_date'] == null
           ? null
           : DateTime.parse(json['return_date'] as String),
@@ -46,6 +47,7 @@ Map<String, dynamic> _$$RentTransactionModelImplToJson(
       'rent_date': instance.renterDate.toIso8601String(),
       'qty': instance.qty,
       'expected_return_date': instance.expectedReturnDate.toIso8601String(),
+      'rent_price': instance.rentPrice,
       'return_date': instance.returnDate?.toIso8601String(),
       'status': _$RentTransactionStatusEnumMap[instance.status],
       'notes': instance.notes,

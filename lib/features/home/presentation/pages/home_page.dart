@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sewa_barang_client/core/config/config.dart';
+import 'package:sewa_barang_client/features/auth/presentation/blocs/auth/auth_cubit.dart';
 import 'package:sewa_barang_client/features/transaction/data/repositories/transaction_repository.dart';
 import 'package:sewa_barang_client/features/transaction/presentation/blocs/get_list_transaction/get_list_transaction_bloc.dart';
 import 'package:sewa_barang_client/features/transaction/presentation/pages/transaction_screen.dart';
@@ -32,8 +32,23 @@ class _HomePageContentState extends State<HomePageContent> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          forceMaterialTransparency: false,
-          primary: false,
+          title: const Text(
+            'Sewa Gan',
+            style: TextStyle(color: Colors.black),
+          ),
+          backgroundColor: Colors.white,
+          forceMaterialTransparency: true,
+          actions: [
+            IconButton(
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                getIt<AuthCubbit>().unAuthenticated();
+              },
+            ),
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,

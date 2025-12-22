@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sewa_barang_client/core/config/config.dart';
 import 'package:sewa_barang_client/features/auth/presentation/blocs/auth/auth_cubit.dart';
+import 'package:sewa_barang_client/features/rent/presentation/pages/rent_page.dart';
 import 'package:sewa_barang_client/features/transaction/data/repositories/transaction_repository.dart';
 import 'package:sewa_barang_client/features/transaction/presentation/blocs/get_list_transaction/get_list_transaction_bloc.dart';
 import 'package:sewa_barang_client/features/transaction/presentation/pages/transaction_screen.dart';
@@ -58,7 +59,7 @@ class _HomePageContentState extends State<HomePageContent> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.scanner),
+              icon: Icon(Icons.swap_horiz),
               label: 'Sewa Barang',
             ),
             BottomNavigationBarItem(
@@ -78,9 +79,7 @@ class _HomePageContentState extends State<HomePageContent> {
       );
     }
     if (_currentIndex == 1) {
-      return const Center(
-        child: Text('Sewa Barang'),
-      );
+      return const RentPage();
     }
     return Center(
         child: TransactionScreen(

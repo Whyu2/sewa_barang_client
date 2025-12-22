@@ -52,6 +52,7 @@ dependencies:
   formz: ^0.4.1
   loader_overlay: ^2.2.0
   flutter_secure_storage: ^8.1.0
+  mobile_scanner: ^5.0.0
 
 dev_dependencies:
   build_runner: ^2.4.8

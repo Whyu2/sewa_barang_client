@@ -3,12 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:sewa_barang_client/core/config/injector.dart';
 import 'package:sewa_barang_client/core/routers/app_router_refresh_stream.dart';
 import 'package:sewa_barang_client/core/routers/routers.dart';
-import 'package:sewa_barang_client/features/auth/data/repositories/auth_repository.dart';
-import 'package:sewa_barang_client/features/auth/presentation/blocs/auth/auth_cubit.dart';
-import 'package:sewa_barang_client/features/auth/presentation/blocs/submit_login/submit_login_bloc.dart';
-import 'package:sewa_barang_client/features/auth/presentation/blocs/form_login/form_login_bloc.dart';
-import 'package:sewa_barang_client/features/auth/presentation/page/login_screen.dart';
-import 'package:sewa_barang_client/features/home/presentation/pages/home_page.dart';
+import 'package:sewa_barang_client/core/repositories/auth_repository.dart';
+import 'package:sewa_barang_client/features/auth/blocs/auth/auth_cubit.dart';
+import 'package:sewa_barang_client/features/auth/blocs/submit_login/submit_login_bloc.dart';
+import 'package:sewa_barang_client/features/auth/blocs/form_login/form_login_bloc.dart';
+import 'package:sewa_barang_client/features/auth/page/login_screen.dart';
+import 'package:sewa_barang_client/features/home/pages/home_page.dart';
+import 'package:sewa_barang_client/features/rent/pages/rent_form_page.dart';
 
 import '../storage/scure_storage_service.dart';
 
@@ -23,6 +24,15 @@ class AppRouter {
         path: RouterConstans.home,
         builder: (BuildContext context, GoRouterState state) {
           return const HomePage();
+        },
+      ),
+      GoRoute(
+        name: RouterConstans.rentForm,
+        path: RouterConstans.rentForm,
+        builder: (BuildContext context, GoRouterState state) {
+          return RentFormPage(
+            code: state.extra as String,
+          );
         },
       ),
       GoRoute(
@@ -46,24 +56,30 @@ class AppRouter {
   }
 
   GoRouter router() => GoRouter(
-      routes: _registerRoutes(),
-      refreshListenable: AppRouterRefreshStream(authCubbit.stream),
-      debugLogDiagnostics: true,
-      redirect: (context, state) {
-        final status = authCubbit.state.status;
-        debugPrint('ini state: $status');
-        // BELUM LOGIN
-        if (status == AuthStatus.unAuthenticated) {
-          debugPrint('belum login');
-          return RouterConstans.login;
-        }
+        routes: _registerRoutes(),
+        refreshListenable: AppRouterRefreshStream(authCubbit.stream),
+        debugLogDiagnostics: true,
+        redirect: (context, state) {
+          final status = authCubbit.state.status;
+          final location = state.matchedLocation;
 
-        // SUDAH LOGIN
-        if (status == AuthStatus.authenticated) {
-          debugPrint('sudah login');
-          return RouterConstans.home;
-        }
+          debugPrint('status: $status | loc: $location');
 
-        return null;
-      });
+          // BELUM LOGIN → cuma boleh di login
+          if (status == AuthStatus.unAuthenticated) {
+            return location == RouterConstans.login
+                ? null
+                : RouterConstans.login;
+          }
+
+          // SUDAH LOGIN → jangan boleh balik ke login
+          if (status == AuthStatus.authenticated &&
+              location == RouterConstans.login) {
+            return RouterConstans.home;
+          }
+
+          // lainnya biarin
+          return null;
+        },
+      );
 }

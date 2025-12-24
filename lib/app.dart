@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sewa_barang_client/core/config/injector.dart';
 import 'package:sewa_barang_client/core/routers/routers.dart';
-import 'package:sewa_barang_client/features/auth/presentation/blocs/auth/auth_cubit.dart';
+import 'package:sewa_barang_client/features/auth/blocs/auth/auth_cubit.dart';
 
 class App extends StatefulWidget {
   const App({super.key});

@@ -112,8 +112,9 @@ class _TextInputFieldState extends State<TextInputField> {
       inputFormatters: widget.textInputFormatters,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
+        label: widget.label != null ? Text(widget.label!) : null,
         border: const OutlineInputBorder(),
-        hintText: widget.label,
+        hintText: widget.hintText,
         errorText: widget.errorText,
       ),
       textAlign: widget.textAlign!,

@@ -9,7 +9,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:sewa_barang_client/core/config/flavors.dart';
 import 'package:sewa_barang_client/core/config/injector.dart';
 import 'package:sewa_barang_client/core/network/network.dart';
-import 'package:sewa_barang_client/features/auth/presentation/blocs/auth/auth_cubit.dart';
+import 'package:sewa_barang_client/features/auth/blocs/auth/auth_cubit.dart';
 
 import '../storage/scure_storage_service.dart';
 

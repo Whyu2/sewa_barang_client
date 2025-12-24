@@ -33,6 +33,7 @@ class _HomePageContentState extends State<HomePageContent> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: const Text(
             'Sewa Gan',
             style: TextStyle(color: Colors.black),

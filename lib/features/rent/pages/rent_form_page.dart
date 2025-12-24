@@ -1,4 +1,7 @@
+import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sewa_barang_client/core/routers/routers.dart';
 import 'package:sewa_barang_client/core/widgets/text_input_field.dart';
 
 class RentFormPage extends StatelessWidget {
@@ -37,7 +40,9 @@ class _RentFormPageContentState extends State<RentFormPageContent> {
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            GoRouter.of(context).pushReplacement(
+              RouterConstans.home,
+            );
           },
         ),
         backgroundColor: Colors.white,
@@ -59,6 +64,7 @@ class _RentFormPageContentState extends State<RentFormPageContent> {
               'Masukkan Data Penyewa',
               style: Theme.of(context).textTheme.displaySmall,
             ),
+            Divider(color: Colors.grey.shade400),
             const TextInputField(
               label: 'Nama Penyewa',
             ),
@@ -74,8 +80,18 @@ class _RentFormPageContentState extends State<RentFormPageContent> {
             const TextInputField(
               label: 'QTY',
             ),
-            const TextInputField(
+            TextInputField(
               label: 'Estimasi Tanggal Pengembalian',
+              onTap: () async {
+                final date = await showDatePickerDialog(
+                  context: context,
+                  minDate: DateTime(2025, 1, 1),
+                  maxDate: DateTime(2099, 12, 31),
+                );
+                if (date != null) {
+                  debugPrint(date.toString());
+                }
+              },
             ),
             const TextInputField(
               label: 'Catatan',

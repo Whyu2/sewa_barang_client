@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sewa_barang_client/features/transaction/blocs/get_list_transaction/get_list_transaction_bloc.dart';
@@ -44,14 +45,14 @@ class _TransactionContentState extends State<TransactionContent> {
             );
           }
 
-          return ListView.builder(
-            itemCount: state.data!.length,
-            itemBuilder: (context, index) {
-              return TransactionListItemCard(
-                model: state.data![index],
-                onTap: () {},
-              );
-            },
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              spacing: 8,
+              children: (state.data ?? [])
+                  .mapIndexed((index, v) => TransactionListItemCard(model: v))
+                  .toList(),
+            ),
           );
         }
         return const Center(

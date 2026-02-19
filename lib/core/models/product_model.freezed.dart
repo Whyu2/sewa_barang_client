@@ -28,8 +28,6 @@ mixin _$ProductModel {
   int get categoryId => throw _privateConstructorUsedError;
   @JsonKey(name: 'category_name')
   String get categoryName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'qty')
-  int get qty => throw _privateConstructorUsedError;
   @JsonKey(name: 'qr_code_url')
   String get qrCodeUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'qr_uuid')
@@ -58,7 +56,6 @@ abstract class $ProductModelCopyWith<$Res> {
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'category_name') String categoryName,
-      @JsonKey(name: 'qty') int qty,
       @JsonKey(name: 'qr_code_url') String qrCodeUrl,
       @JsonKey(name: 'qr_uuid') String qrUuid,
       @JsonKey(name: 'photo_url') String? photoUrl,
@@ -83,7 +80,6 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? name = null,
     Object? categoryId = null,
     Object? categoryName = null,
-    Object? qty = null,
     Object? qrCodeUrl = null,
     Object? qrUuid = null,
     Object? photoUrl = freezed,
@@ -107,10 +103,6 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.categoryName
           : categoryName // ignore: cast_nullable_to_non_nullable
               as String,
-      qty: null == qty
-          ? _value.qty
-          : qty // ignore: cast_nullable_to_non_nullable
-              as int,
       qrCodeUrl: null == qrCodeUrl
           ? _value.qrCodeUrl
           : qrCodeUrl // ignore: cast_nullable_to_non_nullable
@@ -148,7 +140,6 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'category_name') String categoryName,
-      @JsonKey(name: 'qty') int qty,
       @JsonKey(name: 'qr_code_url') String qrCodeUrl,
       @JsonKey(name: 'qr_uuid') String qrUuid,
       @JsonKey(name: 'photo_url') String? photoUrl,
@@ -171,7 +162,6 @@ class __$$ProductModelImplCopyWithImpl<$Res>
     Object? name = null,
     Object? categoryId = null,
     Object? categoryName = null,
-    Object? qty = null,
     Object? qrCodeUrl = null,
     Object? qrUuid = null,
     Object? photoUrl = freezed,
@@ -195,10 +185,6 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.categoryName
           : categoryName // ignore: cast_nullable_to_non_nullable
               as String,
-      qty: null == qty
-          ? _value.qty
-          : qty // ignore: cast_nullable_to_non_nullable
-              as int,
       qrCodeUrl: null == qrCodeUrl
           ? _value.qrCodeUrl
           : qrCodeUrl // ignore: cast_nullable_to_non_nullable
@@ -225,14 +211,13 @@ class __$$ProductModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, checked: true)
 class _$ProductModelImpl implements _ProductModel {
   _$ProductModelImpl(
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'name') required this.name,
       @JsonKey(name: 'category_id') required this.categoryId,
       @JsonKey(name: 'category_name') required this.categoryName,
-      @JsonKey(name: 'qty') required this.qty,
       @JsonKey(name: 'qr_code_url') required this.qrCodeUrl,
       @JsonKey(name: 'qr_uuid') required this.qrUuid,
       @JsonKey(name: 'photo_url') required this.photoUrl,
@@ -255,9 +240,6 @@ class _$ProductModelImpl implements _ProductModel {
   @JsonKey(name: 'category_name')
   final String categoryName;
   @override
-  @JsonKey(name: 'qty')
-  final int qty;
-  @override
   @JsonKey(name: 'qr_code_url')
   final String qrCodeUrl;
   @override
@@ -275,7 +257,7 @@ class _$ProductModelImpl implements _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, name: $name, categoryId: $categoryId, categoryName: $categoryName, qty: $qty, qrCodeUrl: $qrCodeUrl, qrUuid: $qrUuid, photoUrl: $photoUrl, status: $status, description: $description)';
+    return 'ProductModel(id: $id, name: $name, categoryId: $categoryId, categoryName: $categoryName, qrCodeUrl: $qrCodeUrl, qrUuid: $qrUuid, photoUrl: $photoUrl, status: $status, description: $description)';
   }
 
   @override
@@ -289,7 +271,6 @@ class _$ProductModelImpl implements _ProductModel {
                 other.categoryId == categoryId) &&
             (identical(other.categoryName, categoryName) ||
                 other.categoryName == categoryName) &&
-            (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.qrCodeUrl, qrCodeUrl) ||
                 other.qrCodeUrl == qrCodeUrl) &&
             (identical(other.qrUuid, qrUuid) || other.qrUuid == qrUuid) &&
@@ -303,7 +284,7 @@ class _$ProductModelImpl implements _ProductModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, categoryId,
-      categoryName, qty, qrCodeUrl, qrUuid, photoUrl, status, description);
+      categoryName, qrCodeUrl, qrUuid, photoUrl, status, description);
 
   @JsonKey(ignore: true)
   @override
@@ -325,7 +306,6 @@ abstract class _ProductModel implements ProductModel {
           @JsonKey(name: 'name') required final String name,
           @JsonKey(name: 'category_id') required final int categoryId,
           @JsonKey(name: 'category_name') required final String categoryName,
-          @JsonKey(name: 'qty') required final int qty,
           @JsonKey(name: 'qr_code_url') required final String qrCodeUrl,
           @JsonKey(name: 'qr_uuid') required final String qrUuid,
           @JsonKey(name: 'photo_url') required final String? photoUrl,
@@ -348,9 +328,6 @@ abstract class _ProductModel implements ProductModel {
   @override
   @JsonKey(name: 'category_name')
   String get categoryName;
-  @override
-  @JsonKey(name: 'qty')
-  int get qty;
   @override
   @JsonKey(name: 'qr_code_url')
   String get qrCodeUrl;

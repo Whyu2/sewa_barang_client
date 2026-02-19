@@ -125,7 +125,7 @@ class __$$AuthModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, checked: true)
 class _$AuthModelImpl implements _AuthModel {
   _$AuthModelImpl(
       {@JsonKey(name: 'token') required this.token,

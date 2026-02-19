@@ -8,32 +8,56 @@ part of 'rent_transaction_model.dart';
 
 _$RentTransactionModelImpl _$$RentTransactionModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$RentTransactionModelImpl(
-      id: (json['id'] as num).toInt(),
-      productId: (json['product_id'] as num).toInt(),
-      regionId: (json['region_id'] as num).toInt(),
-      renterName: json['renter_name'] as String,
-      renterPhone: json['renter_phone'] as String,
-      renterDate: DateTime.parse(json['rent_date'] as String),
-      qty: (json['qty'] as num).toInt(),
-      expectedReturnDate:
-          DateTime.parse(json['expected_return_date'] as String),
-      rentPrice: (json['rent_price'] as num).toInt(),
-      returnDate: json['return_date'] == null
-          ? null
-          : DateTime.parse(json['return_date'] as String),
-      status:
-          $enumDecodeNullable(_$RentTransactionStatusEnumMap, json['status']),
-      notes: json['notes'] as String?,
-      pickupProofUrl: json['pickup_proof_url'] as String?,
-      returnProofUrl: json['return_proof_url'] as String?,
-      region: json['region'] == null
-          ? null
-          : NameDescriptionModel.fromJson(
-              json['region'] as Map<String, dynamic>),
-      product: json['product'] == null
-          ? null
-          : ProductModel.fromJson(json['product'] as Map<String, dynamic>),
+    $checkedCreate(
+      r'_$RentTransactionModelImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$RentTransactionModelImpl(
+          id: $checkedConvert('id', (v) => (v as num).toInt()),
+          productId: $checkedConvert('product_id', (v) => (v as num).toInt()),
+          regionId: $checkedConvert('region_id', (v) => (v as num).toInt()),
+          renterName: $checkedConvert('renter_name', (v) => v as String),
+          renterPhone: $checkedConvert('renter_phone', (v) => v as String),
+          renterDate:
+              $checkedConvert('rent_date', (v) => DateTime.parse(v as String)),
+          qty: $checkedConvert('qty', (v) => (v as num).toInt()),
+          expectedReturnDate: $checkedConvert(
+              'expected_return_date', (v) => DateTime.parse(v as String)),
+          rentPrice: $checkedConvert('rent_price', (v) => (v as num).toInt()),
+          returnDate: $checkedConvert('return_date',
+              (v) => v == null ? null : DateTime.parse(v as String)),
+          status: $checkedConvert('status',
+              (v) => $enumDecodeNullable(_$RentTransactionStatusEnumMap, v)),
+          notes: $checkedConvert('notes', (v) => v as String?),
+          pickupProofUrl:
+              $checkedConvert('pickup_proof_url', (v) => v as String?),
+          returnProofUrl:
+              $checkedConvert('return_proof_url', (v) => v as String?),
+          region: $checkedConvert(
+              'region',
+              (v) => v == null
+                  ? null
+                  : NameDescriptionModel.fromJson(v as Map<String, dynamic>)),
+          product: $checkedConvert(
+              'product',
+              (v) => v == null
+                  ? null
+                  : ProductModel.fromJson(v as Map<String, dynamic>)),
+        );
+        return val;
+      },
+      fieldKeyMap: const {
+        'productId': 'product_id',
+        'regionId': 'region_id',
+        'renterName': 'renter_name',
+        'renterPhone': 'renter_phone',
+        'renterDate': 'rent_date',
+        'expectedReturnDate': 'expected_return_date',
+        'rentPrice': 'rent_price',
+        'returnDate': 'return_date',
+        'pickupProofUrl': 'pickup_proof_url',
+        'returnProofUrl': 'return_proof_url'
+      },
     );
 
 Map<String, dynamic> _$$RentTransactionModelImplToJson(

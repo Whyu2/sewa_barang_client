@@ -7,17 +7,30 @@ part of 'product_model.dart';
 // **************************************************************************
 
 _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
-    _$ProductModelImpl(
-      id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      categoryId: (json['category_id'] as num).toInt(),
-      categoryName: json['category_name'] as String,
-      qty: (json['qty'] as num).toInt(),
-      qrCodeUrl: json['qr_code_url'] as String,
-      qrUuid: json['qr_uuid'] as String,
-      photoUrl: json['photo_url'] as String?,
-      status: json['status'] as String,
-      description: json['description'] as String?,
+    $checkedCreate(
+      r'_$ProductModelImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$ProductModelImpl(
+          id: $checkedConvert('id', (v) => (v as num).toInt()),
+          name: $checkedConvert('name', (v) => v as String),
+          categoryId: $checkedConvert('category_id', (v) => (v as num).toInt()),
+          categoryName: $checkedConvert('category_name', (v) => v as String),
+          qrCodeUrl: $checkedConvert('qr_code_url', (v) => v as String),
+          qrUuid: $checkedConvert('qr_uuid', (v) => v as String),
+          photoUrl: $checkedConvert('photo_url', (v) => v as String?),
+          status: $checkedConvert('status', (v) => v as String),
+          description: $checkedConvert('description', (v) => v as String?),
+        );
+        return val;
+      },
+      fieldKeyMap: const {
+        'categoryId': 'category_id',
+        'categoryName': 'category_name',
+        'qrCodeUrl': 'qr_code_url',
+        'qrUuid': 'qr_uuid',
+        'photoUrl': 'photo_url'
+      },
     );
 
 Map<String, dynamic> _$$ProductModelImplToJson(_$ProductModelImpl instance) =>
@@ -26,7 +39,6 @@ Map<String, dynamic> _$$ProductModelImplToJson(_$ProductModelImpl instance) =>
       'name': instance.name,
       'category_id': instance.categoryId,
       'category_name': instance.categoryName,
-      'qty': instance.qty,
       'qr_code_url': instance.qrCodeUrl,
       'qr_uuid': instance.qrUuid,
       'photo_url': instance.photoUrl,

@@ -8,10 +8,17 @@ part of 'name_description_model.dart';
 
 _$NameDescriptionModelImpl _$$NameDescriptionModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$NameDescriptionModelImpl(
-      id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      description: json['description'] as String?,
+    $checkedCreate(
+      r'_$NameDescriptionModelImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$NameDescriptionModelImpl(
+          id: $checkedConvert('id', (v) => (v as num).toInt()),
+          name: $checkedConvert('name', (v) => v as String),
+          description: $checkedConvert('description', (v) => v as String?),
+        );
+        return val;
+      },
     );
 
 Map<String, dynamic> _$$NameDescriptionModelImplToJson(

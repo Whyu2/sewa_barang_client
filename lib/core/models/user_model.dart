@@ -5,7 +5,7 @@ part 'user_model.g.dart';
 
 @freezed
 class UserModel with _$UserModel {
-  @JsonSerializable(explicitToJson: true)
+  @JsonSerializable(explicitToJson: true, checked: true)
   factory UserModel({
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'region_id') required int regionId,

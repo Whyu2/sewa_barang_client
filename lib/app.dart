@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sewa_barang_client/core/config/injector.dart';
 import 'package:sewa_barang_client/core/routers/routers.dart';
@@ -60,6 +61,7 @@ class _AppState extends State<App> {
       routerDelegate: router.routerDelegate,
       theme: ThemeData(
         useMaterial3: false,
+        textTheme: GoogleFonts.poppinsTextTheme(),
       ),
     );
   }

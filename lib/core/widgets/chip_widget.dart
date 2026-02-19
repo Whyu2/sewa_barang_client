@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sewa_barang_client/core/style/app_colors.dart';
+import 'package:sewa_barang_client/core/style/app_text_styles.dart';
 
 class ChipWidget extends StatelessWidget {
   final ChipWidgetVariant variant;
@@ -13,19 +15,22 @@ class ChipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color color;
+    TextStyle style = AppTextStyles.poppinsSmRegularBlack;
     switch (variant) {
       case ChipWidgetVariant.primary:
-        color = Colors.blue;
+        color = AppColors.primary2;
+        style = AppTextStyles.poppinsSmSemiBoldPrimary;
         break;
       case ChipWidgetVariant.danger:
-        color = Colors.red;
+        color = AppColors.danger4;
+        style = AppTextStyles.poppinsSmSemiBoldDanger;
         break;
     }
     return Chip(
       backgroundColor: color,
       label: Text(
         label,
-        style: const TextStyle(color: Colors.white),
+        style: style,
       ),
     );
   }

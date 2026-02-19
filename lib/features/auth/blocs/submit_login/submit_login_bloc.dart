@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sewa_barang_client/core/storage/scure_storage_service.dart';
 import 'package:sewa_barang_client/core/models/auth_model.dart';

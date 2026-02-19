@@ -342,7 +342,7 @@ class __$$RentTransactionModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, checked: true)
 class _$RentTransactionModelImpl implements _RentTransactionModel {
   _$RentTransactionModelImpl(
       {@JsonKey(name: 'id') required this.id,

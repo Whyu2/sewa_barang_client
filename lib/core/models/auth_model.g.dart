@@ -7,9 +7,17 @@ part of 'auth_model.dart';
 // **************************************************************************
 
 _$AuthModelImpl _$$AuthModelImplFromJson(Map<String, dynamic> json) =>
-    _$AuthModelImpl(
-      token: json['token'] as String,
-      user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
+    $checkedCreate(
+      r'_$AuthModelImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$AuthModelImpl(
+          token: $checkedConvert('token', (v) => v as String),
+          user: $checkedConvert(
+              'user', (v) => UserModel.fromJson(v as Map<String, dynamic>)),
+        );
+        return val;
+      },
     );
 
 Map<String, dynamic> _$$AuthModelImplToJson(_$AuthModelImpl instance) =>

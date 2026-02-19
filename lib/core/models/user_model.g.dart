@@ -7,11 +7,19 @@ part of 'user_model.dart';
 // **************************************************************************
 
 _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
-    _$UserModelImpl(
-      id: (json['id'] as num).toInt(),
-      regionId: (json['region_id'] as num).toInt(),
-      name: json['name'] as String,
-      role: json['role'] as String,
+    $checkedCreate(
+      r'_$UserModelImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$UserModelImpl(
+          id: $checkedConvert('id', (v) => (v as num).toInt()),
+          regionId: $checkedConvert('region_id', (v) => (v as num).toInt()),
+          name: $checkedConvert('name', (v) => v as String),
+          role: $checkedConvert('role', (v) => v as String),
+        );
+        return val;
+      },
+      fieldKeyMap: const {'regionId': 'region_id'},
     );
 
 Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>

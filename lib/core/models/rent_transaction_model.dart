@@ -7,7 +7,7 @@ part 'rent_transaction_model.g.dart';
 
 @freezed
 class RentTransactionModel with _$RentTransactionModel {
-  @JsonSerializable(explicitToJson: true)
+  @JsonSerializable(explicitToJson: true, checked: true)
   factory RentTransactionModel({
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'product_id') required int productId,

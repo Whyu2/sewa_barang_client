@@ -128,7 +128,7 @@ class __$$NameDescriptionModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, checked: true)
 class _$NameDescriptionModelImpl implements _NameDescriptionModel {
   _$NameDescriptionModelImpl(
       {@JsonKey(name: 'id') required this.id,

@@ -6,7 +6,7 @@ part 'auth_model.g.dart';
 
 @freezed
 class AuthModel with _$AuthModel {
-  @JsonSerializable(explicitToJson: true)
+  @JsonSerializable(explicitToJson: true, checked: true)
   factory AuthModel({
     @JsonKey(name: 'token') required String token,
     @JsonKey(name: 'user') required UserModel user,

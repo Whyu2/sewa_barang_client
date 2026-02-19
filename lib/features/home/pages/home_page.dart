@@ -24,6 +24,7 @@ class HomePageContent extends StatefulWidget {
 
 class _HomePageContentState extends State<HomePageContent> {
   int _currentIndex = 0;
+  String title = 'Home';
   @override
   void initState() {
     super.initState();
@@ -34,9 +35,9 @@ class _HomePageContentState extends State<HomePageContent> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text(
-            'Sewa Gan',
-            style: TextStyle(color: Colors.black),
+          title: Text(
+            title,
+            style: const TextStyle(color: Colors.black),
           ),
           backgroundColor: Colors.white,
           forceMaterialTransparency: true,
@@ -65,10 +66,21 @@ class _HomePageContentState extends State<HomePageContent> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.account_balance_wallet),
-              label: 'Transaction',
+              label: 'Transaksi',
             ),
           ],
-          onTap: (index) => {setState(() => _currentIndex = index)},
+          onTap: (index) => {
+            setState(() {
+              _currentIndex = index;
+              if (index == 0) {
+                title = 'Home';
+              } else if (index == 1) {
+                title = 'Sewa Barang';
+              } else {
+                title = 'Riwayat Transaksi';
+              }
+            })
+          },
         ),
         body: buildBody(context));
   }

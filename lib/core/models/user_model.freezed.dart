@@ -140,7 +140,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, checked: true)
 class _$UserModelImpl implements _UserModel {
   _$UserModelImpl(
       {@JsonKey(name: 'id') required this.id,

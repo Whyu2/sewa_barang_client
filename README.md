@@ -1,16 +1,51 @@
-# sewa_barang_client
+## ⚙️ Requirements
 
-A new Flutter project.
+- Flutter >= 3.27.x (stable)
+- Dart >= 3.6.x
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🧱 Tech Stack
 
-A few resources to get you started if this is your first Flutter project:
+### Architecture & State Management
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- BLoC (flutter_bloc)
+- Equatable
+- Formz
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Networking
+
+- Dio
+- pretty_dio_logger
+
+### Dependency Injection
+
+- get_it
+- injectable
+
+### Routing
+
+- go_router
+
+### Code Generation
+
+- freezed
+- json_serializable
+- build_runner
+
+### Local Storage & Security
+
+- flutter_secure_storage
+
+---
+
+## ⚙️ Setup
+
+```bash
+flutter pub get
+```
+
+## ▶️ Running 
+```bash
+flutter run --flavor dev --target lib/main_dev.dart --dart-define-from-file=env-dev.json
+```

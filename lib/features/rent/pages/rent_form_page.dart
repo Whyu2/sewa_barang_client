@@ -62,7 +62,7 @@ class _RentFormPageContentState extends State<RentFormPageContent> {
           children: <Widget>[
             Text(
               'Masukkan Data Penyewa',
-              style: Theme.of(context).textTheme.displaySmall,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             Divider(color: Colors.grey.shade400),
             const TextInputField(

@@ -47,6 +47,12 @@ class AppTextStyles {
     fontWeight: AppFontWeights.semiBold,
   );
 
+  static final TextStyle poppinsSmSemiBoldWarning = GoogleFonts.poppins(
+    color: AppColors.warningBase,
+    fontSize: AppFontSizes.sm,
+    fontWeight: AppFontWeights.semiBold,
+  );
+
   static final TextStyle poppinsMdSemiBoldNeutral6 = GoogleFonts.poppins(
     fontSize: AppFontSizes.md,
     fontWeight: AppFontWeights.semiBold,
@@ -129,5 +135,17 @@ class AppTextStyles {
     fontSize: AppFontSizes.xs,
     fontWeight: AppFontWeights.regular,
     color: AppColors.neutral6,
+  );
+
+  static final TextStyle poppinsSmRegularNeutral4 = GoogleFonts.poppins(
+    color: AppColors.neutral4,
+    fontSize: AppFontSizes.sm,
+    fontWeight: AppFontWeights.regular,
+  );
+
+  static final TextStyle poppinsSmSemiBoldBlack = GoogleFonts.poppins(
+    color: AppColors.black,
+    fontSize: AppFontSizes.sm,
+    fontWeight: AppFontWeights.semiBold,
   );
 }

@@ -30,7 +30,7 @@ class GetListTransactionBloc
       );
     } catch (err) {
       emit(
-        state.copyWith(status: GetListTransactionStatus.loaded, error: err),
+        state.copyWith(status: GetListTransactionStatus.failure, error: err),
       );
     }
   }

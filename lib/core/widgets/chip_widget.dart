@@ -25,6 +25,10 @@ class ChipWidget extends StatelessWidget {
         color = AppColors.danger4;
         style = AppTextStyles.poppinsSmSemiBoldDanger;
         break;
+      case ChipWidgetVariant.warning:
+        color = AppColors.warning4;
+        style = AppTextStyles.poppinsSmSemiBoldWarning;
+        break;
     }
     return Chip(
       backgroundColor: color,
@@ -39,4 +43,5 @@ class ChipWidget extends StatelessWidget {
 enum ChipWidgetVariant {
   primary,
   danger,
+  warning,
 }

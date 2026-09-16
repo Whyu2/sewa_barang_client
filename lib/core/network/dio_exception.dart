@@ -37,21 +37,22 @@ class DioExceptions implements Exception {
 
   String _handleError(int? statusCode, dynamic error) {
     if (error is Map<String, dynamic>) {
-      if (error.containsKey('message')) {
-        return error['message'];
+      if (error['errors'] is Map) {
+        final errs = (error['errors'] as Map).values.expand((e) => e is List ? e : [e]).join(', ');
+        if (errs.isNotEmpty) return errs;
       }
+      if (error.containsKey('message') && error['message'] is String) return error['message'];
     }
+    if (error is String) return error;
+    String msg = '';
+    try { msg = (error as dynamic)['message']?.toString() ?? error.toString(); } catch (_) { msg = error.toString(); }
     switch (statusCode) {
-      case 400:
-        return 'Bad request | ${error['message']}';
-      case 401:
-        return 'Unauthorized | ${error['message']}';
-      case 403:
-        return 'Forbidden | ${error['message']}';
-      case 404:
-        return 'Not found | ${error['message']}';
-      default:
-        return 'Oops something went wrong | ${error['message']}';
+      case 400: return 'Bad request | $msg';
+      case 401: return 'Unauthorized | $msg';
+      case 403: return 'Forbidden | $msg';
+      case 404: return 'Not found | $msg';
+      case 422: return msg.isNotEmpty ? msg : 'Validasi gagal';
+      default: return 'Oops something went wrong | $msg';
     }
   }
 

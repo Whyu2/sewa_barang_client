@@ -35,25 +35,49 @@ class _RentPageContentState extends State<RentPageContent> {
 
   @override
   Widget build(BuildContext context) {
-    return MobileScanner(
-      controller: _controller,
-      onDetect: (BarcodeCapture capture) async {
-        if (_isNavigating) return;
-
-        final barcode = capture.barcodes.first;
-        final code = barcode.rawValue;
-
-        if (code == null) return;
-        _isNavigating = true;
-        await _controller.stop();
-
-        if (context.mounted) {
-          GoRouter.of(context).push(
-            extra: code,
-            RouterConstans.rentForm,
-          );
-        }
-      },
-    );
+    return Stack(children: [
+      MobileScanner(
+        controller: _controller,
+        onDetect: (BarcodeCapture capture) async {
+          if (_isNavigating) return;
+          final barcode = capture.barcodes.first;
+          final code = barcode.rawValue;
+          if (code == null) return;
+          _isNavigating = true;
+          await _controller.stop();
+          if (context.mounted) {
+            GoRouter.of(context)
+                .push(extra: code, RouterConstans.rentForm)
+                .then((_) async {
+              _isNavigating = false;
+              await _controller.start();
+            });
+          }
+        },
+      ),
+      Center(
+          child: Container(
+              width: 250,
+              height: 250,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 2),
+                  borderRadius: BorderRadius.circular(16)))),
+      const Positioned(
+          bottom: 32,
+          left: 16,
+          right: 16,
+          child: Text('Arahkan QR ke dalam bingkai',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  backgroundColor: Colors.black54))),
+      Positioned(
+          top: 16,
+          right: 16,
+          child: IconButton(
+              icon: const Icon(Icons.flash_on, color: Colors.white),
+              onPressed: () => _controller.toggleTorch())),
+    ]);
   }
 }

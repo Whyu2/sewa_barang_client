@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sewa_barang_client/core/style/app_colors.dart';
 import 'package:sewa_barang_client/core/style/app_text_styles.dart';
 import 'package:sewa_barang_client/core/utils/datetime_utils.dart';
+import 'package:sewa_barang_client/core/utils/format_trx.dart';
 import 'package:sewa_barang_client/core/utils/string_utils.dart';
 import 'package:sewa_barang_client/core/widgets/chip_widget.dart';
 import 'package:sewa_barang_client/core/models/models.dart';
@@ -39,7 +40,7 @@ class TransactionListItemCard extends StatelessWidget {
                         style: AppTextStyles.poppinsLgSemiBoldInfo1,
                       ),
                       Text(
-                        '# ${model.id}',
+                        formatTRX(model.id),
                         style: AppTextStyles.poppinsLgBoldBlack,
                       ),
                     ],
@@ -72,38 +73,29 @@ class TransactionListItemCard extends StatelessWidget {
                             image: CachedNetworkImageProvider(
                               model.pickupProofUrl!,
                             ),
+                            fit: BoxFit.cover,
                           )
                         : null,
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      model.product?.name ?? '-',
-                      style: AppTextStyles.poppinsLgBoldBlack,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text:
-                                '${StringUtil.formatNumberForHuman(model.qty.toDouble())} item',
-                            style: AppTextStyles.poppinsLgRegularNeutral4,
-                          ),
-                          TextSpan(
-                            text: ' • ',
-                            style: AppTextStyles.poppinsLgRegularNeutral4,
-                          ),
-                          TextSpan(
-                            text: StringUtil.formatCurrencyIdr(
-                                model.rentPrice.toDouble()),
-                            style: AppTextStyles.poppinsLgRegularInfo1,
-                          ),
-                        ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        model.product?.name ?? '-',
+                        style: AppTextStyles.poppinsLgBoldBlack,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    )
-                  ],
+                      Text(
+                        '${StringUtil.formatNumberForHuman(model.qty.toDouble())} item • ${StringUtil.formatCurrencyIdr(model.rentPrice.toDouble())}',
+                        style: AppTextStyles.poppinsMdRegularNeutral4,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -116,63 +108,31 @@ class TransactionListItemCard extends StatelessWidget {
   }
 
   Widget _buildDate(BuildContext context, RentTransactionModel model) {
-    bool isDone = model.status == RentTransactionStatus.done;
+    bool isDone = model.status == RentTransactionStatus.done || model.status == RentTransactionStatus.returned || model.status == RentTransactionStatus.overdue;
     return NeutralCard(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 4,
+          spacing: 8,
           children: [
-            const Icon(
-              Icons.calendar_month,
-              color: AppColors.info1,
-            ),
-            Text(
-              'TANGGAL SEWA',
-              style: AppTextStyles.poppinsMdRegularNeutral4,
-            ),
-            const Spacer(),
-            Text(
-              model.renterDate.dMMMMyyyy(),
-              style: AppTextStyles.poppinsMdSemiBoldBlack,
-            )
+            const Icon(Icons.calendar_month, color: AppColors.info1, size: 18),
+            Expanded(child: Text('TANGGAL SEWA', style: AppTextStyles.poppinsSmRegularNeutral4)),
+            Flexible(child: Text(model.rentDate.dMMMMyyyy(), style: AppTextStyles.poppinsSmSemiBoldBlack, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.right)),
           ],
         ),
         const Padding(
-          padding: EdgeInsets.only(left: 4),
-          child: SizedBox(
-            height: 24,
-            child: VerticalDivider(
-              color: AppColors.neutral3,
-              thickness: 1,
-            ),
-          ),
+          padding: EdgeInsets.only(left: 7),
+          child: SizedBox(height: 16, child: VerticalDivider(color: AppColors.neutral3, thickness: 1)),
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 4,
+          spacing: 8,
           children: [
-            const Icon(
-              Icons.calendar_month,
-              color: AppColors.info1,
-            ),
-            Text(
-              isDone ? 'TANGGAL KEMBALI' : 'ESTIMASI KEMBALI',
-              style: AppTextStyles.poppinsMdRegularNeutral4,
-            ),
-            const Spacer(),
-            Text(
-              isDone
-                  ? model.returnDate != null
-                      ? model.returnDate!.dMMMMyyyy()
-                      : '-'
-                  : model.expectedReturnDate.dMMMMyyyy(),
-              style: AppTextStyles.poppinsMdSemiBoldBlack,
-            )
+            const Icon(Icons.calendar_month, color: AppColors.info1, size: 18),
+            Expanded(child: Text(isDone ? 'TANGGAL KEMBALI' : 'ESTIMASI KEMBALI', style: AppTextStyles.poppinsSmRegularNeutral4)),
+            Flexible(child: Text(isDone ? (model.returnDate != null ? model.returnDate!.dMMMMyyyy() : '-') : model.expectedReturnDate.dMMMMyyyy(), style: AppTextStyles.poppinsSmSemiBoldBlack, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.right)),
           ],
         )
       ],

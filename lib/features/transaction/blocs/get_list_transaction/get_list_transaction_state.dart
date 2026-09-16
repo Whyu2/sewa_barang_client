@@ -3,11 +3,13 @@ part of 'get_list_transaction_bloc.dart';
 enum GetListTransactionStatus {
   initial,
   loading,
-  loaded;
+  loaded,
+  failure;
 
   bool get isInitial => this == GetListTransactionStatus.initial;
   bool get isLoading => this == GetListTransactionStatus.loading;
   bool get isLoaded => this == GetListTransactionStatus.loaded;
+  bool get isFailure => this == GetListTransactionStatus.failure;
 }
 
 @freezed

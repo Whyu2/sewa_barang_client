@@ -16,6 +16,7 @@ class BaseRemoteDataSource {
   @protected
   Future<Response<T>> get<T>(
     String path, {
+    Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? queryParams,
     Options? options,
     CancelToken? cancelToken,
@@ -25,7 +26,7 @@ class BaseRemoteDataSource {
     try {
       response = await dio.get(
         _getUrl(path),
-        queryParameters: queryParams,
+        queryParameters: queryParameters ?? queryParams,
         options: options,
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,

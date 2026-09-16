@@ -6,14 +6,21 @@ enum RentTransactionStatus {
   @JsonValue('rented')
   rented,
   @JsonValue('done')
-  done;
+  done,
+  @JsonValue('returned')
+  returned,
+  @JsonValue('overdue')
+  overdue;
 
   String get displayName {
     switch (this) {
       case RentTransactionStatus.rented:
         return 'Disewa';
       case RentTransactionStatus.done:
-        return 'Selesai';
+      case RentTransactionStatus.returned:
+        return 'Dikembalikan';
+      case RentTransactionStatus.overdue:
+        return 'Terlambat';
     }
   }
 
@@ -23,6 +30,10 @@ enum RentTransactionStatus {
         return 'rented';
       case RentTransactionStatus.done:
         return 'done';
+      case RentTransactionStatus.returned:
+        return 'returned';
+      case RentTransactionStatus.overdue:
+        return 'overdue';
     }
   }
 
@@ -30,8 +41,11 @@ enum RentTransactionStatus {
     switch (this) {
       case RentTransactionStatus.rented:
         return ChipWidgetVariant.danger;
+      case RentTransactionStatus.returned:
       case RentTransactionStatus.done:
         return ChipWidgetVariant.primary;
+      case RentTransactionStatus.overdue:
+        return ChipWidgetVariant.warning;
     }
   }
 }

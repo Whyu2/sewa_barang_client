@@ -31,7 +31,7 @@ mixin _$RentTransactionModel {
   @JsonKey(name: 'renter_phone')
   String get renterPhone => throw _privateConstructorUsedError;
   @JsonKey(name: 'rent_date')
-  DateTime get renterDate => throw _privateConstructorUsedError;
+  DateTime get rentDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'qty')
   int get qty => throw _privateConstructorUsedError;
   @JsonKey(name: 'expected_return_date')
@@ -71,7 +71,7 @@ abstract class $RentTransactionModelCopyWith<$Res> {
       @JsonKey(name: 'region_id') int regionId,
       @JsonKey(name: 'renter_name') String renterName,
       @JsonKey(name: 'renter_phone') String renterPhone,
-      @JsonKey(name: 'rent_date') DateTime renterDate,
+      @JsonKey(name: 'rent_date') DateTime rentDate,
       @JsonKey(name: 'qty') int qty,
       @JsonKey(name: 'expected_return_date') DateTime expectedReturnDate,
       @JsonKey(name: 'rent_price') int rentPrice,
@@ -106,7 +106,7 @@ class _$RentTransactionModelCopyWithImpl<$Res,
     Object? regionId = null,
     Object? renterName = null,
     Object? renterPhone = null,
-    Object? renterDate = null,
+    Object? rentDate = null,
     Object? qty = null,
     Object? expectedReturnDate = null,
     Object? rentPrice = null,
@@ -139,9 +139,9 @@ class _$RentTransactionModelCopyWithImpl<$Res,
           ? _value.renterPhone
           : renterPhone // ignore: cast_nullable_to_non_nullable
               as String,
-      renterDate: null == renterDate
-          ? _value.renterDate
-          : renterDate // ignore: cast_nullable_to_non_nullable
+      rentDate: null == rentDate
+          ? _value.rentDate
+          : rentDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       qty: null == qty
           ? _value.qty
@@ -225,7 +225,7 @@ abstract class _$$RentTransactionModelImplCopyWith<$Res>
       @JsonKey(name: 'region_id') int regionId,
       @JsonKey(name: 'renter_name') String renterName,
       @JsonKey(name: 'renter_phone') String renterPhone,
-      @JsonKey(name: 'rent_date') DateTime renterDate,
+      @JsonKey(name: 'rent_date') DateTime rentDate,
       @JsonKey(name: 'qty') int qty,
       @JsonKey(name: 'expected_return_date') DateTime expectedReturnDate,
       @JsonKey(name: 'rent_price') int rentPrice,
@@ -259,7 +259,7 @@ class __$$RentTransactionModelImplCopyWithImpl<$Res>
     Object? regionId = null,
     Object? renterName = null,
     Object? renterPhone = null,
-    Object? renterDate = null,
+    Object? rentDate = null,
     Object? qty = null,
     Object? expectedReturnDate = null,
     Object? rentPrice = null,
@@ -292,9 +292,9 @@ class __$$RentTransactionModelImplCopyWithImpl<$Res>
           ? _value.renterPhone
           : renterPhone // ignore: cast_nullable_to_non_nullable
               as String,
-      renterDate: null == renterDate
-          ? _value.renterDate
-          : renterDate // ignore: cast_nullable_to_non_nullable
+      rentDate: null == rentDate
+          ? _value.rentDate
+          : rentDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       qty: null == qty
           ? _value.qty
@@ -350,7 +350,7 @@ class _$RentTransactionModelImpl implements _RentTransactionModel {
       @JsonKey(name: 'region_id') required this.regionId,
       @JsonKey(name: 'renter_name') required this.renterName,
       @JsonKey(name: 'renter_phone') required this.renterPhone,
-      @JsonKey(name: 'rent_date') required this.renterDate,
+      @JsonKey(name: 'rent_date') required this.rentDate,
       @JsonKey(name: 'qty') required this.qty,
       @JsonKey(name: 'expected_return_date') required this.expectedReturnDate,
       @JsonKey(name: 'rent_price') required this.rentPrice,
@@ -382,7 +382,7 @@ class _$RentTransactionModelImpl implements _RentTransactionModel {
   final String renterPhone;
   @override
   @JsonKey(name: 'rent_date')
-  final DateTime renterDate;
+  final DateTime rentDate;
   @override
   @JsonKey(name: 'qty')
   final int qty;
@@ -416,7 +416,7 @@ class _$RentTransactionModelImpl implements _RentTransactionModel {
 
   @override
   String toString() {
-    return 'RentTransactionModel(id: $id, productId: $productId, regionId: $regionId, renterName: $renterName, renterPhone: $renterPhone, renterDate: $renterDate, qty: $qty, expectedReturnDate: $expectedReturnDate, rentPrice: $rentPrice, returnDate: $returnDate, status: $status, notes: $notes, pickupProofUrl: $pickupProofUrl, returnProofUrl: $returnProofUrl, region: $region, product: $product)';
+    return 'RentTransactionModel(id: $id, productId: $productId, regionId: $regionId, renterName: $renterName, renterPhone: $renterPhone, rentDate: $rentDate, qty: $qty, expectedReturnDate: $expectedReturnDate, rentPrice: $rentPrice, returnDate: $returnDate, status: $status, notes: $notes, pickupProofUrl: $pickupProofUrl, returnProofUrl: $returnProofUrl, region: $region, product: $product)';
   }
 
   @override
@@ -433,8 +433,8 @@ class _$RentTransactionModelImpl implements _RentTransactionModel {
                 other.renterName == renterName) &&
             (identical(other.renterPhone, renterPhone) ||
                 other.renterPhone == renterPhone) &&
-            (identical(other.renterDate, renterDate) ||
-                other.renterDate == renterDate) &&
+            (identical(other.rentDate, rentDate) ||
+                other.rentDate == rentDate) &&
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.expectedReturnDate, expectedReturnDate) ||
                 other.expectedReturnDate == expectedReturnDate) &&
@@ -461,7 +461,7 @@ class _$RentTransactionModelImpl implements _RentTransactionModel {
       regionId,
       renterName,
       renterPhone,
-      renterDate,
+      rentDate,
       qty,
       expectedReturnDate,
       rentPrice,
@@ -496,7 +496,7 @@ abstract class _RentTransactionModel implements RentTransactionModel {
           @JsonKey(name: 'region_id') required final int regionId,
           @JsonKey(name: 'renter_name') required final String renterName,
           @JsonKey(name: 'renter_phone') required final String renterPhone,
-          @JsonKey(name: 'rent_date') required final DateTime renterDate,
+          @JsonKey(name: 'rent_date') required final DateTime rentDate,
           @JsonKey(name: 'qty') required final int qty,
           @JsonKey(name: 'expected_return_date')
           required final DateTime expectedReturnDate,
@@ -530,7 +530,7 @@ abstract class _RentTransactionModel implements RentTransactionModel {
   String get renterPhone;
   @override
   @JsonKey(name: 'rent_date')
-  DateTime get renterDate;
+  DateTime get rentDate;
   @override
   @JsonKey(name: 'qty')
   int get qty;

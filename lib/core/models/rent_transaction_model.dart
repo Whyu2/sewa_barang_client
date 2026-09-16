@@ -14,7 +14,7 @@ class RentTransactionModel with _$RentTransactionModel {
     @JsonKey(name: 'region_id') required int regionId,
     @JsonKey(name: 'renter_name') required String renterName,
     @JsonKey(name: 'renter_phone') required String renterPhone,
-    @JsonKey(name: 'rent_date') required DateTime renterDate,
+    @JsonKey(name: 'rent_date') required DateTime rentDate,
     @JsonKey(name: 'qty') required int qty,
     @JsonKey(name: 'expected_return_date') required DateTime expectedReturnDate,
     @JsonKey(name: 'rent_price') required int rentPrice,

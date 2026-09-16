@@ -10,6 +10,8 @@ import 'package:sewa_barang_client/features/auth/blocs/form_login/form_login_blo
 import 'package:sewa_barang_client/features/auth/page/login_screen.dart';
 import 'package:sewa_barang_client/features/home/pages/home_page.dart';
 import 'package:sewa_barang_client/features/rent/pages/rent_form_page.dart';
+import 'package:sewa_barang_client/features/transaction/pages/transaction_detail_page.dart';
+import 'package:sewa_barang_client/features/transaction/pages/return_form_page.dart';
 
 import '../storage/scure_storage_service.dart';
 
@@ -35,6 +37,8 @@ class AppRouter {
           );
         },
       ),
+      GoRoute(name: RouterConstans.transactionDetail, path: '${RouterConstans.transactionDetail}/:id', builder: (c, s) => TransactionDetailPage(id: int.parse(s.pathParameters['id']!))),
+      GoRoute(name: RouterConstans.returnForm, path: '${RouterConstans.returnForm}/:id', builder: (c, s) => ReturnFormPage(id: int.parse(s.pathParameters['id']!))),
       GoRoute(
         name: RouterConstans.login,
         path: RouterConstans.login,

@@ -18,7 +18,7 @@ _$RentTransactionModelImpl _$$RentTransactionModelImplFromJson(
           regionId: $checkedConvert('region_id', (v) => (v as num).toInt()),
           renterName: $checkedConvert('renter_name', (v) => v as String),
           renterPhone: $checkedConvert('renter_phone', (v) => v as String),
-          renterDate:
+          rentDate:
               $checkedConvert('rent_date', (v) => DateTime.parse(v as String)),
           qty: $checkedConvert('qty', (v) => (v as num).toInt()),
           expectedReturnDate: $checkedConvert(
@@ -51,7 +51,7 @@ _$RentTransactionModelImpl _$$RentTransactionModelImplFromJson(
         'regionId': 'region_id',
         'renterName': 'renter_name',
         'renterPhone': 'renter_phone',
-        'renterDate': 'rent_date',
+        'rentDate': 'rent_date',
         'expectedReturnDate': 'expected_return_date',
         'rentPrice': 'rent_price',
         'returnDate': 'return_date',
@@ -68,7 +68,7 @@ Map<String, dynamic> _$$RentTransactionModelImplToJson(
       'region_id': instance.regionId,
       'renter_name': instance.renterName,
       'renter_phone': instance.renterPhone,
-      'rent_date': instance.renterDate.toIso8601String(),
+      'rent_date': instance.rentDate.toIso8601String(),
       'qty': instance.qty,
       'expected_return_date': instance.expectedReturnDate.toIso8601String(),
       'rent_price': instance.rentPrice,
@@ -84,4 +84,6 @@ Map<String, dynamic> _$$RentTransactionModelImplToJson(
 const _$RentTransactionStatusEnumMap = {
   RentTransactionStatus.rented: 'rented',
   RentTransactionStatus.done: 'done',
+  RentTransactionStatus.returned: 'returned',
+  RentTransactionStatus.overdue: 'overdue',
 };

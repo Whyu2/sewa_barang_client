@@ -16,19 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$GetListTransactionEvent {
+  bool get mine => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetch,
+    required TResult Function(bool mine) fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetch,
+    TResult? Function(bool mine)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetch,
+    TResult Function(bool mine)? fetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +49,10 @@ mixin _$GetListTransactionEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $GetListTransactionEventCopyWith<GetListTransactionEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -55,6 +60,8 @@ abstract class $GetListTransactionEventCopyWith<$Res> {
   factory $GetListTransactionEventCopyWith(GetListTransactionEvent value,
           $Res Function(GetListTransactionEvent) then) =
       _$GetListTransactionEventCopyWithImpl<$Res, GetListTransactionEvent>;
+  @useResult
+  $Res call({bool mine});
 }
 
 /// @nodoc
@@ -67,13 +74,30 @@ class _$GetListTransactionEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? mine = null,
+  }) {
+    return _then(_value.copyWith(
+      mine: null == mine
+          ? _value.mine
+          : mine // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$FetchImplCopyWith<$Res> {
+abstract class _$$FetchImplCopyWith<$Res>
+    implements $GetListTransactionEventCopyWith<$Res> {
   factory _$$FetchImplCopyWith(
           _$FetchImpl value, $Res Function(_$FetchImpl) then) =
       __$$FetchImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool mine});
 }
 
 /// @nodoc
@@ -83,51 +107,76 @@ class __$$FetchImplCopyWithImpl<$Res>
   __$$FetchImplCopyWithImpl(
       _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? mine = null,
+  }) {
+    return _then(_$FetchImpl(
+      mine: null == mine
+          ? _value.mine
+          : mine // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$FetchImpl implements _Fetch {
-  const _$FetchImpl();
+  const _$FetchImpl({this.mine = false});
+
+  @override
+  @JsonKey()
+  final bool mine;
 
   @override
   String toString() {
-    return 'GetListTransactionEvent.fetch()';
+    return 'GetListTransactionEvent.fetch(mine: $mine)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FetchImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$FetchImpl &&
+            (identical(other.mine, mine) || other.mine == mine));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, mine);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetch,
+    required TResult Function(bool mine) fetch,
   }) {
-    return fetch();
+    return fetch(mine);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetch,
+    TResult? Function(bool mine)? fetch,
   }) {
-    return fetch?.call();
+    return fetch?.call(mine);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetch,
+    TResult Function(bool mine)? fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch();
+      return fetch(mine);
     }
     return orElse();
   }
@@ -162,7 +211,14 @@ class _$FetchImpl implements _Fetch {
 }
 
 abstract class _Fetch implements GetListTransactionEvent {
-  const factory _Fetch() = _$FetchImpl;
+  const factory _Fetch({final bool mine}) = _$FetchImpl;
+
+  @override
+  bool get mine;
+  @override
+  @JsonKey(ignore: true)
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

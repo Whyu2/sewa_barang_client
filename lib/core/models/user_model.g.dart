@@ -15,6 +15,7 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
           id: $checkedConvert('id', (v) => (v as num).toInt()),
           regionId: $checkedConvert('region_id', (v) => (v as num).toInt()),
           name: $checkedConvert('name', (v) => v as String),
+          email: $checkedConvert('email', (v) => v as String?),
           role: $checkedConvert('role', (v) => v as String),
         );
         return val;
@@ -27,5 +28,6 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'id': instance.id,
       'region_id': instance.regionId,
       'name': instance.name,
+      'email': instance.email,
       'role': instance.role,
     };

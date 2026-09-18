@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sewa_barang_client/core/form/string_form.dart';
+import 'package:sewa_barang_client/core/widgets/app_button.dart';
+import 'package:sewa_barang_client/core/widgets/app_snackbar.dart';
 import 'package:sewa_barang_client/core/widgets/text_input_field.dart';
 import 'package:sewa_barang_client/core/models/auth_model.dart';
 import 'package:sewa_barang_client/features/auth/blocs/submit_login/submit_login_bloc.dart';
@@ -68,21 +70,11 @@ class _LoginContentState extends State<LoginContent> {
           if (state.status == SubmitLoginStatus.loaded) {
             context.loaderOverlay.hide();
             if (state.error != null) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Colors.red,
-                  content: Text(state.error.toString()),
-                ),
-              );
+              showTopError(context, state.error.toString());
             }
           }
           if (state.status == SubmitLoginStatus.loaded && state.data != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                backgroundColor: Colors.green,
-                content: Text('Login Berhasil'),
-              ),
-            );
+            showTopSuccess(context, 'Login Berhasil');
             widget.onSuccess(context, state.data!);
           }
         },
@@ -119,7 +111,9 @@ class _LoginContentState extends State<LoginContent> {
                           FormLoginEvent.changePassword(password: value),
                         ),
                   ),
-                  ElevatedButton(
+                  AppButton(
+                      label: 'Login',
+                      fullWidth: true,
                       onPressed: state.formzStatus.isValid
                           ? () {
                               context.read<SubmitLoginBloc>().add(
@@ -129,8 +123,7 @@ class _LoginContentState extends State<LoginContent> {
                                     ),
                                   );
                             }
-                          : null,
-                      child: const Text('Login')),
+                          : null),
                 ],
               ),
             );

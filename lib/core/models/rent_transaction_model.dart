@@ -25,6 +25,8 @@ class RentTransactionModel with _$RentTransactionModel {
     @JsonKey(name: 'return_proof_url') String? returnProofUrl,
     @JsonKey(name: 'region') NameDescriptionModel? region,
     @JsonKey(name: 'product') ProductModel? product,
+    @JsonKey(name: 'created_by') int? createdBy,
+    @JsonKey(name: 'creator') NameDescriptionModel? creator,
   }) = _RentTransactionModel;
 
   factory RentTransactionModel.fromJson(Map<String, dynamic> json) =>

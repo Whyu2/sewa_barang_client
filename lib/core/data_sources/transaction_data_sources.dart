@@ -5,6 +5,9 @@ import 'package:sewa_barang_client/core/config/flavors.dart';
 import 'package:sewa_barang_client/core/network/dio_client.dart';
 import 'package:sewa_barang_client/core/network/network.dart';
 import '../models/rent_transaction_model.dart';
+import '../models/dashboard_stats_model.dart';
+import '../models/dashboard_tables.dart';
+import '../models/name_description_model.dart';
 import '../models/transaction_log_model.dart';
 
 abstract class TransactionDataSource extends BaseRemoteDataSource {
@@ -13,11 +16,15 @@ abstract class TransactionDataSource extends BaseRemoteDataSource {
     required super.apiBaseUrl,
   });
 
-  Future<ApiResult<ListResult<RentTransactionModel>>> getListTransaction();
+  Future<ApiResult<ListResult<RentTransactionModel>>> getListTransaction(
+      {bool mine = false});
   Future<ApiResult<RentTransactionModel>> getTransaction(int id);
   Future<ApiResult<RentTransactionModel>> createTransaction(FormData data);
   Future<ApiResult<RentTransactionModel>> returnTransaction(
       int id, FormData data);
+  Future<ApiResult<DashboardStatsModel>> getDashboardStats({bool mine = false});
+  Future<ApiResult<DashboardTables>> getDashboardTables({bool mine = false});
+  Future<ApiResult<ListResult<NameDescriptionModel>>> getRegions();
   Future<ApiResult<ListResult<TransactionLogModel>>> getLogs(
       {int? transactionId});
 }
@@ -32,9 +39,10 @@ class TransactionDataSourceImpl extends BaseRemoteDataSource
         );
 
   @override
-  Future<ApiResult<ListResult<RentTransactionModel>>>
-      getListTransaction() async {
-    final response = await get('rent-transactions');
+  Future<ApiResult<ListResult<RentTransactionModel>>> getListTransaction(
+      {bool mine = false}) async {
+    final response = await get('rent-transactions',
+        queryParameters: mine ? {'mine': 1} : null);
     debugPrint('getListTransaction: $response');
     return ApiResult.fromResponseListResult(
       response.data,
@@ -68,6 +76,34 @@ class TransactionDataSourceImpl extends BaseRemoteDataSource
         options: Options(headers: {'Content-Type': 'multipart/form-data'}));
     return ApiResult.fromResponse(
         response.data, (json) => RentTransactionModel.fromJson(json));
+  }
+
+  @override
+  Future<ApiResult<DashboardStatsModel>> getDashboardStats(
+      {bool mine = false}) async {
+    final response = await get('dashboard-stats',
+        queryParameters: mine ? {'mine': 1} : null);
+    return ApiResult.fromResponse(
+        response.data, (json) => DashboardStatsModel.fromJson(json));
+  }
+
+  @override
+  Future<ApiResult<DashboardTables>> getDashboardTables(
+      {bool mine = false}) async {
+    final response = await get('dashboard-tables',
+        queryParameters: mine ? {'mine': 1} : null);
+    return ApiResult.fromResponse(
+        response.data, (json) => DashboardTables.fromJson(json));
+  }
+
+  @override
+  Future<ApiResult<ListResult<NameDescriptionModel>>> getRegions() async {
+    final response = await get('regions');
+    final raw = response.data;
+    final list = raw['data'] is List ? raw['data'] : [];
+    return ApiResult.fromResponseListResult(
+        {'status': raw['status'], 'data': list},
+        (json) => NameDescriptionModel.fromJson(json));
   }
 
   @override

@@ -52,6 +52,10 @@ mixin _$RentTransactionModel {
   NameDescriptionModel? get region => throw _privateConstructorUsedError;
   @JsonKey(name: 'product')
   ProductModel? get product => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_by')
+  int? get createdBy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'creator')
+  NameDescriptionModel? get creator => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -81,10 +85,13 @@ abstract class $RentTransactionModelCopyWith<$Res> {
       @JsonKey(name: 'pickup_proof_url') String? pickupProofUrl,
       @JsonKey(name: 'return_proof_url') String? returnProofUrl,
       @JsonKey(name: 'region') NameDescriptionModel? region,
-      @JsonKey(name: 'product') ProductModel? product});
+      @JsonKey(name: 'product') ProductModel? product,
+      @JsonKey(name: 'created_by') int? createdBy,
+      @JsonKey(name: 'creator') NameDescriptionModel? creator});
 
   $NameDescriptionModelCopyWith<$Res>? get region;
   $ProductModelCopyWith<$Res>? get product;
+  $NameDescriptionModelCopyWith<$Res>? get creator;
 }
 
 /// @nodoc
@@ -117,6 +124,8 @@ class _$RentTransactionModelCopyWithImpl<$Res,
     Object? returnProofUrl = freezed,
     Object? region = freezed,
     Object? product = freezed,
+    Object? createdBy = freezed,
+    Object? creator = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -183,6 +192,14 @@ class _$RentTransactionModelCopyWithImpl<$Res,
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as ProductModel?,
+      createdBy: freezed == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as int?,
+      creator: freezed == creator
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
+              as NameDescriptionModel?,
     ) as $Val);
   }
 
@@ -207,6 +224,18 @@ class _$RentTransactionModelCopyWithImpl<$Res,
 
     return $ProductModelCopyWith<$Res>(_value.product!, (value) {
       return _then(_value.copyWith(product: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NameDescriptionModelCopyWith<$Res>? get creator {
+    if (_value.creator == null) {
+      return null;
+    }
+
+    return $NameDescriptionModelCopyWith<$Res>(_value.creator!, (value) {
+      return _then(_value.copyWith(creator: value) as $Val);
     });
   }
 }
@@ -235,12 +264,16 @@ abstract class _$$RentTransactionModelImplCopyWith<$Res>
       @JsonKey(name: 'pickup_proof_url') String? pickupProofUrl,
       @JsonKey(name: 'return_proof_url') String? returnProofUrl,
       @JsonKey(name: 'region') NameDescriptionModel? region,
-      @JsonKey(name: 'product') ProductModel? product});
+      @JsonKey(name: 'product') ProductModel? product,
+      @JsonKey(name: 'created_by') int? createdBy,
+      @JsonKey(name: 'creator') NameDescriptionModel? creator});
 
   @override
   $NameDescriptionModelCopyWith<$Res>? get region;
   @override
   $ProductModelCopyWith<$Res>? get product;
+  @override
+  $NameDescriptionModelCopyWith<$Res>? get creator;
 }
 
 /// @nodoc
@@ -270,6 +303,8 @@ class __$$RentTransactionModelImplCopyWithImpl<$Res>
     Object? returnProofUrl = freezed,
     Object? region = freezed,
     Object? product = freezed,
+    Object? createdBy = freezed,
+    Object? creator = freezed,
   }) {
     return _then(_$RentTransactionModelImpl(
       id: null == id
@@ -336,6 +371,14 @@ class __$$RentTransactionModelImplCopyWithImpl<$Res>
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as ProductModel?,
+      createdBy: freezed == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as int?,
+      creator: freezed == creator
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
+              as NameDescriptionModel?,
     ));
   }
 }
@@ -360,7 +403,9 @@ class _$RentTransactionModelImpl implements _RentTransactionModel {
       @JsonKey(name: 'pickup_proof_url') this.pickupProofUrl,
       @JsonKey(name: 'return_proof_url') this.returnProofUrl,
       @JsonKey(name: 'region') this.region,
-      @JsonKey(name: 'product') this.product});
+      @JsonKey(name: 'product') this.product,
+      @JsonKey(name: 'created_by') this.createdBy,
+      @JsonKey(name: 'creator') this.creator});
 
   factory _$RentTransactionModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RentTransactionModelImplFromJson(json);
@@ -413,10 +458,16 @@ class _$RentTransactionModelImpl implements _RentTransactionModel {
   @override
   @JsonKey(name: 'product')
   final ProductModel? product;
+  @override
+  @JsonKey(name: 'created_by')
+  final int? createdBy;
+  @override
+  @JsonKey(name: 'creator')
+  final NameDescriptionModel? creator;
 
   @override
   String toString() {
-    return 'RentTransactionModel(id: $id, productId: $productId, regionId: $regionId, renterName: $renterName, renterPhone: $renterPhone, rentDate: $rentDate, qty: $qty, expectedReturnDate: $expectedReturnDate, rentPrice: $rentPrice, returnDate: $returnDate, status: $status, notes: $notes, pickupProofUrl: $pickupProofUrl, returnProofUrl: $returnProofUrl, region: $region, product: $product)';
+    return 'RentTransactionModel(id: $id, productId: $productId, regionId: $regionId, renterName: $renterName, renterPhone: $renterPhone, rentDate: $rentDate, qty: $qty, expectedReturnDate: $expectedReturnDate, rentPrice: $rentPrice, returnDate: $returnDate, status: $status, notes: $notes, pickupProofUrl: $pickupProofUrl, returnProofUrl: $returnProofUrl, region: $region, product: $product, createdBy: $createdBy, creator: $creator)';
   }
 
   @override
@@ -449,7 +500,10 @@ class _$RentTransactionModelImpl implements _RentTransactionModel {
             (identical(other.returnProofUrl, returnProofUrl) ||
                 other.returnProofUrl == returnProofUrl) &&
             (identical(other.region, region) || other.region == region) &&
-            (identical(other.product, product) || other.product == product));
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.creator, creator) || other.creator == creator));
   }
 
   @JsonKey(ignore: true)
@@ -471,7 +525,9 @@ class _$RentTransactionModelImpl implements _RentTransactionModel {
       pickupProofUrl,
       returnProofUrl,
       region,
-      product);
+      product,
+      createdBy,
+      creator);
 
   @JsonKey(ignore: true)
   @override
@@ -507,7 +563,9 @@ abstract class _RentTransactionModel implements RentTransactionModel {
           @JsonKey(name: 'pickup_proof_url') final String? pickupProofUrl,
           @JsonKey(name: 'return_proof_url') final String? returnProofUrl,
           @JsonKey(name: 'region') final NameDescriptionModel? region,
-          @JsonKey(name: 'product') final ProductModel? product}) =
+          @JsonKey(name: 'product') final ProductModel? product,
+          @JsonKey(name: 'created_by') final int? createdBy,
+          @JsonKey(name: 'creator') final NameDescriptionModel? creator}) =
       _$RentTransactionModelImpl;
 
   factory _RentTransactionModel.fromJson(Map<String, dynamic> json) =
@@ -561,6 +619,12 @@ abstract class _RentTransactionModel implements RentTransactionModel {
   @override
   @JsonKey(name: 'product')
   ProductModel? get product;
+  @override
+  @JsonKey(name: 'created_by')
+  int? get createdBy;
+  @override
+  @JsonKey(name: 'creator')
+  NameDescriptionModel? get creator;
   @override
   @JsonKey(ignore: true)
   _$$RentTransactionModelImplCopyWith<_$RentTransactionModelImpl>

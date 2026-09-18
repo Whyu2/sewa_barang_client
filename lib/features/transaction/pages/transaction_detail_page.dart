@@ -9,7 +9,10 @@ import 'package:sewa_barang_client/core/style/app_colors.dart';
 import 'package:sewa_barang_client/core/style/app_text_styles.dart';
 import 'package:sewa_barang_client/core/utils/datetime_utils.dart';
 import 'package:sewa_barang_client/core/utils/format_trx.dart';
+import 'package:sewa_barang_client/core/utils/image_url_utils.dart';
 import 'package:sewa_barang_client/core/utils/string_utils.dart';
+import 'package:sewa_barang_client/core/widgets/app_bar.dart';
+import 'package:sewa_barang_client/core/widgets/app_button.dart';
 import 'package:sewa_barang_client/core/widgets/outlined_card.dart';
 
 class TransactionDetailPage extends StatefulWidget {
@@ -47,13 +50,73 @@ class _TransactionDetailPageState extends State<TransactionDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text(formatTRX(widget.id))),
-        body: _loading
-            ? const Center(child: CircularProgressIndicator())
-            : _error != null
-                ? Center(child: Text(_error!))
-                : _buildBody());
+    void goList() => GoRouter.of(context).go(RouterConstans.transactionList);
+    return PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, _) {
+          if (!didPop) goList();
+        },
+        child: Scaffold(
+            appBar: AppBarBase(
+                leading: AppBackButton(onPressed: goList),
+                title: const Text('Detail Transaksi')),
+            body: _loading
+                ? const Center(child: CircularProgressIndicator())
+                : _error != null
+                    ? Center(child: Text(_error!))
+                    : _buildBody()));
+  }
+
+  Widget _productCard(RentTransactionModel m) {
+    final p = m.product;
+    return OutlinedCard(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 12,
+            children: [
+          Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 12,
+              children: [
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: p?.photoUrl != null
+                        ? CachedNetworkImage(
+                            imageUrl: resolveApiImageUrl(p!.photoUrl!) ?? '',
+                            height: 96,
+                            width: 96,
+                            fit: BoxFit.cover,
+                            errorWidget: (_, __, ___) => Container(
+                                height: 96,
+                                width: 96,
+                                color: AppColors.neutral1,
+                                child: const Icon(Icons.inventory_2,
+                                    size: 40, color: AppColors.neutral3)))
+                        : Container(
+                            height: 96,
+                            width: 96,
+                            color: AppColors.neutral1,
+                            child: const Icon(Icons.inventory_2,
+                                size: 40, color: AppColors.neutral3))),
+                Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 4,
+                        children: [
+                      Text(p?.name ?? '-',
+                          style: AppTextStyles.poppinsMdSemiBoldBlack),
+                      Text(p?.categoryName ?? '-',
+                          style: AppTextStyles.poppinsSmRegularNeutral4),
+                    ])),
+              ]),
+          const Divider(height: 1),
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text('Deskripsi', style: AppTextStyles.poppinsSmRegularNeutral4),
+            const SizedBox(height: 2),
+            Text(p?.description ?? '-',
+                style: AppTextStyles.poppinsSmSemiBoldBlack)
+          ]),
+        ]));
   }
 
   Widget _buildBody() {
@@ -76,7 +139,7 @@ class _TransactionDetailPageState extends State<TransactionDetailPage> {
                   ? ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: CachedNetworkImage(
-                          imageUrl: url,
+                          imageUrl: resolveApiImageUrl(url) ?? '',
                           height: 180,
                           width: double.infinity,
                           fit: BoxFit.cover))
@@ -91,6 +154,7 @@ class _TransactionDetailPageState extends State<TransactionDetailPage> {
     return SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(spacing: 12, children: [
+          _productCard(m),
           OutlinedCard(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +167,7 @@ class _TransactionDetailPageState extends State<TransactionDetailPage> {
                 ]),
                 Row(children: [
                   Expanded(child: field('Penyewa', m.renterName)),
-                  Expanded(child: field('HP', m.renterPhone))
+                  Expanded(child: field('No HP', m.renterPhone))
                 ]),
                 Row(children: [
                   Expanded(child: field('Region', m.region?.name ?? '-')),
@@ -115,22 +179,17 @@ class _TransactionDetailPageState extends State<TransactionDetailPage> {
                           'Harga Sewa',
                           StringUtil.formatCurrencyIdr(
                               m.rentPrice.toDouble()))),
-                  Expanded(
-                      child: field(
-                          'Total',
-                          StringUtil.formatCurrencyIdr(
-                              (m.qty * m.rentPrice).toDouble())))
                 ]),
                 Row(children: [
-                  Expanded(child: field('Tgl Sewa', m.rentDate.dMMMMyyyy())),
+                  Expanded(child: field('Tgl Sewa', m.rentDate.dMMMyyyy())),
                   Expanded(
                       child: field(
-                          'Estimasi Kembali', m.expectedReturnDate.dMMMMyyyy()))
+                          'Estimasi Kembali', m.expectedReturnDate.dMMMyyyy()))
                 ]),
                 Row(children: [
                   Expanded(
                       child: field('Tgl Kembali Aktual',
-                          m.returnDate?.dMMMMyyyy() ?? '-')),
+                          m.returnDate?.dMMMyyyy() ?? '-')),
                 ]),
                 field('Kategori', m.product?.categoryName ?? '-'),
                 field('Catatan', m.notes ?? '-'),
@@ -140,14 +199,13 @@ class _TransactionDetailPageState extends State<TransactionDetailPage> {
             Expanded(child: proof('Return Proof', m.returnProofUrl))
           ]),
           if (canReturn)
-            SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                    icon: const Icon(Icons.assignment_return),
-                    label: const Text('Kembalikan Barang'),
-                    onPressed: () => GoRouter.of(context)
-                        .push('${RouterConstans.returnForm}/${m.id}')
-                        .then((_) => _load()))),
+            AppButton(
+                label: 'Kembalikan Barang',
+                icon: Icons.assignment_return,
+                fullWidth: true,
+                onPressed: () => GoRouter.of(context)
+                    .push('${RouterConstans.returnForm}/${m.id}')
+                    .then((_) => _load())),
         ]));
   }
 }

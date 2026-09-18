@@ -21,7 +21,7 @@ mixin _$CreateTransactionEvent {
   String get renterName => throw _privateConstructorUsedError;
   String get renterPhone => throw _privateConstructorUsedError;
   DateTime get rentDate => throw _privateConstructorUsedError;
-  DateTime get expectedReturnDate => throw _privateConstructorUsedError;
+  int get rentalDurationDays => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
   int get rentPrice => throw _privateConstructorUsedError;
   String get pickupProofPath => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ mixin _$CreateTransactionEvent {
             String renterName,
             String renterPhone,
             DateTime rentDate,
-            DateTime expectedReturnDate,
+            int rentalDurationDays,
             int qty,
             int rentPrice,
             String pickupProofPath,
@@ -50,7 +50,7 @@ mixin _$CreateTransactionEvent {
             String renterName,
             String renterPhone,
             DateTime rentDate,
-            DateTime expectedReturnDate,
+            int rentalDurationDays,
             int qty,
             int rentPrice,
             String pickupProofPath,
@@ -66,7 +66,7 @@ mixin _$CreateTransactionEvent {
             String renterName,
             String renterPhone,
             DateTime rentDate,
-            DateTime expectedReturnDate,
+            int rentalDurationDays,
             int qty,
             int rentPrice,
             String pickupProofPath,
@@ -109,7 +109,7 @@ abstract class $CreateTransactionEventCopyWith<$Res> {
       String renterName,
       String renterPhone,
       DateTime rentDate,
-      DateTime expectedReturnDate,
+      int rentalDurationDays,
       int qty,
       int rentPrice,
       String pickupProofPath,
@@ -135,7 +135,7 @@ class _$CreateTransactionEventCopyWithImpl<$Res,
     Object? renterName = null,
     Object? renterPhone = null,
     Object? rentDate = null,
-    Object? expectedReturnDate = null,
+    Object? rentalDurationDays = null,
     Object? qty = null,
     Object? rentPrice = null,
     Object? pickupProofPath = null,
@@ -162,10 +162,10 @@ class _$CreateTransactionEventCopyWithImpl<$Res,
           ? _value.rentDate
           : rentDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      expectedReturnDate: null == expectedReturnDate
-          ? _value.expectedReturnDate
-          : expectedReturnDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      rentalDurationDays: null == rentalDurationDays
+          ? _value.rentalDurationDays
+          : rentalDurationDays // ignore: cast_nullable_to_non_nullable
+              as int,
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -200,7 +200,7 @@ abstract class _$$SubmitImplCopyWith<$Res>
       String renterName,
       String renterPhone,
       DateTime rentDate,
-      DateTime expectedReturnDate,
+      int rentalDurationDays,
       int qty,
       int rentPrice,
       String pickupProofPath,
@@ -223,7 +223,7 @@ class __$$SubmitImplCopyWithImpl<$Res>
     Object? renterName = null,
     Object? renterPhone = null,
     Object? rentDate = null,
-    Object? expectedReturnDate = null,
+    Object? rentalDurationDays = null,
     Object? qty = null,
     Object? rentPrice = null,
     Object? pickupProofPath = null,
@@ -250,10 +250,10 @@ class __$$SubmitImplCopyWithImpl<$Res>
           ? _value.rentDate
           : rentDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      expectedReturnDate: null == expectedReturnDate
-          ? _value.expectedReturnDate
-          : expectedReturnDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      rentalDurationDays: null == rentalDurationDays
+          ? _value.rentalDurationDays
+          : rentalDurationDays // ignore: cast_nullable_to_non_nullable
+              as int,
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -283,7 +283,7 @@ class _$SubmitImpl implements _Submit {
       required this.renterName,
       required this.renterPhone,
       required this.rentDate,
-      required this.expectedReturnDate,
+      required this.rentalDurationDays,
       required this.qty,
       required this.rentPrice,
       required this.pickupProofPath,
@@ -300,7 +300,7 @@ class _$SubmitImpl implements _Submit {
   @override
   final DateTime rentDate;
   @override
-  final DateTime expectedReturnDate;
+  final int rentalDurationDays;
   @override
   final int qty;
   @override
@@ -312,7 +312,7 @@ class _$SubmitImpl implements _Submit {
 
   @override
   String toString() {
-    return 'CreateTransactionEvent.submit(qrUuid: $qrUuid, regionId: $regionId, renterName: $renterName, renterPhone: $renterPhone, rentDate: $rentDate, expectedReturnDate: $expectedReturnDate, qty: $qty, rentPrice: $rentPrice, pickupProofPath: $pickupProofPath, notes: $notes)';
+    return 'CreateTransactionEvent.submit(qrUuid: $qrUuid, regionId: $regionId, renterName: $renterName, renterPhone: $renterPhone, rentDate: $rentDate, rentalDurationDays: $rentalDurationDays, qty: $qty, rentPrice: $rentPrice, pickupProofPath: $pickupProofPath, notes: $notes)';
   }
 
   @override
@@ -329,8 +329,8 @@ class _$SubmitImpl implements _Submit {
                 other.renterPhone == renterPhone) &&
             (identical(other.rentDate, rentDate) ||
                 other.rentDate == rentDate) &&
-            (identical(other.expectedReturnDate, expectedReturnDate) ||
-                other.expectedReturnDate == expectedReturnDate) &&
+            (identical(other.rentalDurationDays, rentalDurationDays) ||
+                other.rentalDurationDays == rentalDurationDays) &&
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.rentPrice, rentPrice) ||
                 other.rentPrice == rentPrice) &&
@@ -347,7 +347,7 @@ class _$SubmitImpl implements _Submit {
       renterName,
       renterPhone,
       rentDate,
-      expectedReturnDate,
+      rentalDurationDays,
       qty,
       rentPrice,
       pickupProofPath,
@@ -368,7 +368,7 @@ class _$SubmitImpl implements _Submit {
             String renterName,
             String renterPhone,
             DateTime rentDate,
-            DateTime expectedReturnDate,
+            int rentalDurationDays,
             int qty,
             int rentPrice,
             String pickupProofPath,
@@ -376,7 +376,7 @@ class _$SubmitImpl implements _Submit {
         submit,
   }) {
     return submit(qrUuid, regionId, renterName, renterPhone, rentDate,
-        expectedReturnDate, qty, rentPrice, pickupProofPath, notes);
+        rentalDurationDays, qty, rentPrice, pickupProofPath, notes);
   }
 
   @override
@@ -388,7 +388,7 @@ class _$SubmitImpl implements _Submit {
             String renterName,
             String renterPhone,
             DateTime rentDate,
-            DateTime expectedReturnDate,
+            int rentalDurationDays,
             int qty,
             int rentPrice,
             String pickupProofPath,
@@ -396,7 +396,7 @@ class _$SubmitImpl implements _Submit {
         submit,
   }) {
     return submit?.call(qrUuid, regionId, renterName, renterPhone, rentDate,
-        expectedReturnDate, qty, rentPrice, pickupProofPath, notes);
+        rentalDurationDays, qty, rentPrice, pickupProofPath, notes);
   }
 
   @override
@@ -408,7 +408,7 @@ class _$SubmitImpl implements _Submit {
             String renterName,
             String renterPhone,
             DateTime rentDate,
-            DateTime expectedReturnDate,
+            int rentalDurationDays,
             int qty,
             int rentPrice,
             String pickupProofPath,
@@ -418,7 +418,7 @@ class _$SubmitImpl implements _Submit {
   }) {
     if (submit != null) {
       return submit(qrUuid, regionId, renterName, renterPhone, rentDate,
-          expectedReturnDate, qty, rentPrice, pickupProofPath, notes);
+          rentalDurationDays, qty, rentPrice, pickupProofPath, notes);
     }
     return orElse();
   }
@@ -459,7 +459,7 @@ abstract class _Submit implements CreateTransactionEvent {
       required final String renterName,
       required final String renterPhone,
       required final DateTime rentDate,
-      required final DateTime expectedReturnDate,
+      required final int rentalDurationDays,
       required final int qty,
       required final int rentPrice,
       required final String pickupProofPath,
@@ -476,7 +476,7 @@ abstract class _Submit implements CreateTransactionEvent {
   @override
   DateTime get rentDate;
   @override
-  DateTime get expectedReturnDate;
+  int get rentalDurationDays;
   @override
   int get qty;
   @override

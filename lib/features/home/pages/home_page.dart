@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sewa_barang_client/core/config/config.dart';
-import 'package:sewa_barang_client/core/repositories/repositories.dart';
-import 'package:sewa_barang_client/features/auth/blocs/auth/auth_cubit.dart';
-import 'package:sewa_barang_client/features/rent/pages/rent_page.dart';
-import 'package:sewa_barang_client/features/transaction/blocs/get_list_transaction/get_list_transaction_bloc.dart';
-import 'package:sewa_barang_client/features/transaction/pages/transaction_page.dart';
+import 'package:sewa_barang_client/core/widgets/app_bar.dart';
+import 'package:sewa_barang_client/features/home/pages/home_dashboard.dart';
+import 'package:sewa_barang_client/features/profile/pages/profile_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -24,35 +21,28 @@ class HomePageContent extends StatefulWidget {
 
 class _HomePageContentState extends State<HomePageContent> {
   int _currentIndex = 0;
-  String title = 'Home';
   @override
   void initState() {
     super.initState();
   }
 
+  void _goTo(int index) {
+    setState(() => _currentIndex = index);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            title,
-            style: const TextStyle(color: Colors.black),
-          ),
-          backgroundColor: Colors.white,
-          forceMaterialTransparency: true,
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                getIt<AuthCubbit>().unAuthenticated();
-              },
-            ),
-          ],
-        ),
+        appBar: _currentIndex == 0
+            ? const AppBarBase(
+                automaticallyImplyLeading: false,
+                leading: Padding(
+                  padding: EdgeInsets.only(left: 16),
+                  child: Icon(Icons.home,
+                      color: Colors.black, size: 32),
+                ),
+              )
+            : null,
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           items: const <BottomNavigationBarItem>[
@@ -61,44 +51,19 @@ class _HomePageContentState extends State<HomePageContent> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.swap_horiz),
-              label: 'Sewa Barang',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.account_balance_wallet),
-              label: 'Transaksi',
+              icon: Icon(Icons.person),
+              label: 'Saya',
             ),
           ],
-          onTap: (index) => {
-            setState(() {
-              _currentIndex = index;
-              if (index == 0) {
-                title = 'Home';
-              } else if (index == 1) {
-                title = 'Sewa Barang';
-              } else {
-                title = 'Riwayat Transaksi';
-              }
-            })
-          },
+          onTap: _goTo,
         ),
         body: buildBody(context));
   }
 
   Widget buildBody(BuildContext context) {
     if (_currentIndex == 0) {
-      return const Center(
-        child: Text('Home'),
-      );
+      return const HomeDashboard();
     }
-    if (_currentIndex == 1) {
-      return const RentPage();
-    }
-    return Center(
-        child: TransactionPage(
-      getListTransactionBloc: GetListTransactionBloc(
-        getIt<TransactionRepository>(),
-      ),
-    ));
+    return const ProfilePage();
   }
 }

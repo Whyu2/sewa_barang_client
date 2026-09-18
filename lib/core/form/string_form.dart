@@ -94,6 +94,13 @@ class StringForm extends FormzInput<String?, StringValidationError> {
     r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
   );
 
+  static final _phoneRegex = RegExp(r'^\+?[0-9]{9,15}$');
+
+  static bool _isPhoneValid(String value) {
+    final normalized = value.replaceAll(RegExp(r'[\s\-]'), '');
+    return _phoneRegex.hasMatch(normalized);
+  }
+
   @override
   StringValidationError? validator(String? value) {
     if (isRequired) {
@@ -104,7 +111,7 @@ class StringForm extends FormzInput<String?, StringValidationError> {
         return StringValidationError.emailInvalid;
       }
       if (isPhoneNumber) {
-        if (value.startsWith('0')) {
+        if (!_isPhoneValid(value)) {
           return StringValidationError.phoneInvalid;
         }
       }
@@ -127,7 +134,7 @@ class StringForm extends FormzInput<String?, StringValidationError> {
           return StringValidationError.emailInvalid;
         }
         if (isPhoneNumber) {
-          if (value!.startsWith('0')) {
+          if (!_isPhoneValid(value!)) {
             return StringValidationError.phoneInvalid;
           }
         }

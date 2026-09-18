@@ -4,6 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../data_sources/transaction_data_sources.dart';
+import '../models/dashboard_stats_model.dart';
+import '../models/dashboard_tables.dart';
+import '../models/name_description_model.dart';
 import '../models/rent_transaction_model.dart';
 import '../models/transaction_log_model.dart';
 
@@ -20,9 +23,11 @@ class TransactionRepository {
     }
   }
 
-  Future<List<RentTransactionModel>?> getListTransactionFromRemote() async {
+  Future<List<RentTransactionModel>?> getListTransactionFromRemote(
+      {bool mine = false}) async {
     try {
-      final response = await _remoteDataSource.getListTransaction();
+      final response =
+          await _remoteDataSource.getListTransaction(mine: mine);
       return response.data!.data;
     } on DioError catch (err) {
       throw err.toString();
@@ -42,6 +47,35 @@ class TransactionRepository {
     try {
       final res = await _remoteDataSource.returnTransaction(id, data);
       return res.data!;
+    } on DioError catch (err) {
+      throw err.toString();
+    }
+  }
+
+  Future<DashboardStatsModel> getDashboardStatsFromRemote(
+      {bool mine = false}) async {
+    try {
+      final res = await _remoteDataSource.getDashboardStats(mine: mine);
+      return res.data!;
+    } on DioError catch (err) {
+      throw err.toString();
+    }
+  }
+
+  Future<DashboardTables> getDashboardTablesFromRemote(
+      {bool mine = false}) async {
+    try {
+      final res = await _remoteDataSource.getDashboardTables(mine: mine);
+      return res.data!;
+    } on DioError catch (err) {
+      throw err.toString();
+    }
+  }
+
+  Future<List<NameDescriptionModel>?> getRegionsFromRemote() async {
+    try {
+      final res = await _remoteDataSource.getRegions();
+      return res.data!.data;
     } on DioError catch (err) {
       throw err.toString();
     }

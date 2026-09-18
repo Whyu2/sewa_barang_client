@@ -4,6 +4,7 @@ import 'package:sewa_barang_client/core/style/app_colors.dart';
 import 'package:sewa_barang_client/core/style/app_text_styles.dart';
 import 'package:sewa_barang_client/core/utils/datetime_utils.dart';
 import 'package:sewa_barang_client/core/utils/format_trx.dart';
+import 'package:sewa_barang_client/core/utils/image_url_utils.dart';
 import 'package:sewa_barang_client/core/utils/string_utils.dart';
 import 'package:sewa_barang_client/core/widgets/chip_widget.dart';
 import 'package:sewa_barang_client/core/models/models.dart';
@@ -60,23 +61,31 @@ class TransactionListItemCard extends StatelessWidget {
             Row(
               spacing: 8,
               children: [
-                Container(
-                  height: 80,
-                  width: 80,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(12),
-                    ),
-                    color: AppColors.neutral1,
-                    image: model.pickupProofUrl != null
-                        ? DecorationImage(
-                            image: CachedNetworkImageProvider(
-                              model.pickupProofUrl!,
-                            ),
-                            fit: BoxFit.cover,
-                          )
-                        : null,
-                  ),
+                ClipRRect(
+                  borderRadius:
+                      const BorderRadius.all(Radius.circular(12)),
+                  child: model.product?.photoUrl != null
+                      ? CachedNetworkImage(
+                          imageUrl: resolveApiImageUrl(
+                                  model.product!.photoUrl!) ??
+                              '',
+                          height: 80,
+                          width: 80,
+                          fit: BoxFit.cover,
+                          errorWidget: (_, __, ___) => Container(
+                              height: 80,
+                              width: 80,
+                              color: AppColors.neutral1,
+                              child: const Icon(Icons.inventory_2,
+                                  size: 36, color: AppColors.neutral3)),
+                        )
+                      : Container(
+                          height: 80,
+                          width: 80,
+                          color: AppColors.neutral1,
+                          child: const Icon(Icons.inventory_2,
+                              size: 36, color: AppColors.neutral3),
+                        ),
                 ),
                 Expanded(
                   child: Column(
@@ -108,7 +117,9 @@ class TransactionListItemCard extends StatelessWidget {
   }
 
   Widget _buildDate(BuildContext context, RentTransactionModel model) {
-    bool isDone = model.status == RentTransactionStatus.done || model.status == RentTransactionStatus.returned || model.status == RentTransactionStatus.overdue;
+    bool isDone = model.status == RentTransactionStatus.done ||
+        model.status == RentTransactionStatus.returned ||
+        model.status == RentTransactionStatus.overdue;
     return NeutralCard(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,21 +129,42 @@ class TransactionListItemCard extends StatelessWidget {
           spacing: 8,
           children: [
             const Icon(Icons.calendar_month, color: AppColors.info1, size: 18),
-            Expanded(child: Text('TANGGAL SEWA', style: AppTextStyles.poppinsSmRegularNeutral4)),
-            Flexible(child: Text(model.rentDate.dMMMMyyyy(), style: AppTextStyles.poppinsSmSemiBoldBlack, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.right)),
+            Expanded(
+                child: Text('TANGGAL SEWA',
+                    style: AppTextStyles.poppinsSmRegularNeutral4)),
+            Flexible(
+                child: Text(model.rentDate.dMMMyyyy(),
+                    style: AppTextStyles.poppinsSmSemiBoldBlack,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.right)),
           ],
         ),
         const Padding(
           padding: EdgeInsets.only(left: 7),
-          child: SizedBox(height: 16, child: VerticalDivider(color: AppColors.neutral3, thickness: 1)),
+          child: SizedBox(
+              height: 16,
+              child: VerticalDivider(color: AppColors.neutral3, thickness: 1)),
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           spacing: 8,
           children: [
             const Icon(Icons.calendar_month, color: AppColors.info1, size: 18),
-            Expanded(child: Text(isDone ? 'TANGGAL KEMBALI' : 'ESTIMASI KEMBALI', style: AppTextStyles.poppinsSmRegularNeutral4)),
-            Flexible(child: Text(isDone ? (model.returnDate != null ? model.returnDate!.dMMMMyyyy() : '-') : model.expectedReturnDate.dMMMMyyyy(), style: AppTextStyles.poppinsSmSemiBoldBlack, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.right)),
+            Expanded(
+                child: Text(isDone ? 'TANGGAL KEMBALI' : 'ESTIMASI KEMBALI',
+                    style: AppTextStyles.poppinsSmRegularNeutral4)),
+            Flexible(
+                child: Text(
+                    isDone
+                        ? (model.returnDate != null
+                            ? model.returnDate!.dMMMyyyy()
+                            : '-')
+                        : model.expectedReturnDate.dMMMyyyy(),
+                    style: AppTextStyles.poppinsSmSemiBoldBlack,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.right)),
           ],
         )
       ],

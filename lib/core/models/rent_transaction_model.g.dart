@@ -43,6 +43,12 @@ _$RentTransactionModelImpl _$$RentTransactionModelImplFromJson(
               (v) => v == null
                   ? null
                   : ProductModel.fromJson(v as Map<String, dynamic>)),
+          createdBy: $checkedConvert('created_by', (v) => (v as num?)?.toInt()),
+          creator: $checkedConvert(
+              'creator',
+              (v) => v == null
+                  ? null
+                  : NameDescriptionModel.fromJson(v as Map<String, dynamic>)),
         );
         return val;
       },
@@ -56,7 +62,8 @@ _$RentTransactionModelImpl _$$RentTransactionModelImplFromJson(
         'rentPrice': 'rent_price',
         'returnDate': 'return_date',
         'pickupProofUrl': 'pickup_proof_url',
-        'returnProofUrl': 'return_proof_url'
+        'returnProofUrl': 'return_proof_url',
+        'createdBy': 'created_by'
       },
     );
 
@@ -79,6 +86,8 @@ Map<String, dynamic> _$$RentTransactionModelImplToJson(
       'return_proof_url': instance.returnProofUrl,
       'region': instance.region?.toJson(),
       'product': instance.product?.toJson(),
+      'created_by': instance.createdBy,
+      'creator': instance.creator?.toJson(),
     };
 
 const _$RentTransactionStatusEnumMap = {

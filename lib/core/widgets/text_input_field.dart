@@ -97,6 +97,11 @@ class _TextInputFieldState extends State<TextInputField> {
 
   @override
   Widget build(BuildContext context) {
+    final radius = BorderRadius.circular(widget.borderRadius ?? 12);
+    final border = OutlineInputBorder(
+      borderRadius: radius,
+      borderSide: const BorderSide(color: Colors.grey),
+    );
     return TextFormField(
       focusNode: _focusNode,
       style: widget.textStyle,
@@ -113,7 +118,10 @@ class _TextInputFieldState extends State<TextInputField> {
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
         label: widget.label != null ? Text(widget.label!) : null,
-        border: const OutlineInputBorder(),
+        border: border,
+        enabledBorder: border,
+        focusedBorder: border,
+        disabledBorder: border,
         hintText: widget.hintText,
         errorText: widget.errorText,
       ),

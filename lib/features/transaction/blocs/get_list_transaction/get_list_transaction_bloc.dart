@@ -24,7 +24,7 @@ class GetListTransactionBloc
       ),
     );
     try {
-      final agent = await _repo.getListTransactionFromRemote();
+      final agent = await _repo.getListTransactionFromRemote(mine: event.mine);
       emit(
         state.copyWith(status: GetListTransactionStatus.loaded, data: agent),
       );

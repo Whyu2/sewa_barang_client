@@ -1,12 +1,17 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sewa_barang_client/core/config/injector.dart';
 import 'package:sewa_barang_client/core/repositories/repositories.dart';
+import 'package:sewa_barang_client/core/widgets/app_bar.dart';
+import 'package:sewa_barang_client/core/widgets/app_button.dart';
+import 'package:sewa_barang_client/core/widgets/app_snackbar.dart';
+import 'package:sewa_barang_client/features/transaction/blocs/return_form/return_form_bloc.dart';
 import 'package:sewa_barang_client/features/transaction/blocs/return_transaction/return_transaction_bloc.dart';
 
 class ReturnFormPage extends StatelessWidget {
@@ -14,9 +19,11 @@ class ReturnFormPage extends StatelessWidget {
   const ReturnFormPage({super.key, required this.id});
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (_) => ReturnTransactionBloc(getIt<TransactionRepository>()),
-        child: ReturnFormContent(id: id));
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (_) => ReturnFormBloc()),
+      BlocProvider(
+          create: (_) => ReturnTransactionBloc(getIt<TransactionRepository>())),
+    ], child: ReturnFormContent(id: id));
   }
 }
 
@@ -28,7 +35,6 @@ class ReturnFormContent extends StatefulWidget {
 }
 
 class _ReturnFormContentState extends State<ReturnFormContent> {
-  DateTime _returnDate = DateTime.now();
   XFile? _file;
   final _picker = ImagePicker();
   Future<void> _pick() async {
@@ -60,74 +66,81 @@ class _ReturnFormContentState extends State<ReturnFormContent> {
             context.loaderOverlay.hide();
           }
           if (s.status == ReturnTransactionStatus.success) {
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Pengembalian berhasil')));
+            showTopSuccess(context, 'Pengembalian berhasil');
             context.pop();
           }
           if (s.status == ReturnTransactionStatus.failure) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(s.error.toString())));
+            showTopError(context, s.error.toString());
           }
         },
         child: Scaffold(
-            appBar: AppBar(title: Text('Pengembalian #${widget.id}')),
-            body: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(spacing: 12, children: [
-                  InkWell(
-                      onTap: () async {
-                        final d = await showDatePicker(
-                            context: context,
-                            initialDate: _returnDate,
-                            firstDate: DateTime(2020),
-                            lastDate: DateTime(2099));
-                        if (d != null) setState(() => _returnDate = d);
-                      },
-                      child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Text(
-                              'Tanggal Kembali: ${DateFormat('dd MMM yyyy').format(_returnDate)}'))),
-                  InkWell(
-                      onTap: _pick,
-                      child: Container(
-                          width: double.infinity,
-                          height: 180,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: _file == null
-                              ? const Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                      Icon(Icons.camera_alt, size: 32),
-                                      Text('Foto Bukti Pengembalian * wajib')
-                                    ])
-                              : ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: Image.file(File(_file!.path),
-                                      fit: BoxFit.cover,
-                                      width: double.infinity)))),
-                  SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                          icon: const Icon(Icons.check),
-                          label: const Text('Konfirmasi Kembalikan'),
-                          onPressed: () {
-                            if (_file == null) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Foto wajib')));
-                              return;
-                            }
-                            context.read<ReturnTransactionBloc>().add(
-                                ReturnTransactionEvent.submit(
-                                    id: widget.id,
-                                    returnDate: _returnDate,
-                                    returnProofPath: _file!.path));
-                          }))
-                ]))));
+            appBar:
+                AppBarBase(title: Text('Pengembalian #${widget.id}')),
+            body: BlocBuilder<ReturnFormBloc, ReturnFormState>(
+                builder: (context, form) {
+              final returnDate = form.returnDate ?? DateTime.now();
+              final canSubmit =
+                  form.formzStatus.isValid && _file != null;
+              return Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(spacing: 12, children: [
+                    InkWell(
+                        onTap: () async {
+                          final formBloc = context.read<ReturnFormBloc>();
+                          final d = await showDatePicker(
+                              context: context,
+                              initialDate: returnDate,
+                              firstDate: DateTime(2020),
+                              lastDate: DateTime(2099));
+                          if (d != null) {
+                            formBloc.add(
+                                ReturnFormEvent.changeReturnDate(
+                                    returnDate: d));
+                          }
+                        },
+                        child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Text(
+                                'Tanggal Kembali: ${DateFormat('dd MMM yyyy').format(returnDate)}'))),
+                    InkWell(
+                        onTap: _pick,
+                        child: Container(
+                            width: double.infinity,
+                            height: 180,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: _file == null
+                                ? const Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                        Icon(Icons.camera_alt, size: 32),
+                                        Text('Foto Bukti Pengembalian * wajib')
+                                      ])
+                                : ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.file(File(_file!.path),
+                                        fit: BoxFit.cover,
+                                        width: double.infinity)))),
+                    AppButton(
+                        label: 'Konfirmasi Kembalikan',
+                        icon: Icons.check,
+                        fullWidth: true,
+                        onPressed: canSubmit
+                            ? () {
+                                context
+                                    .read<ReturnTransactionBloc>()
+                                    .add(ReturnTransactionEvent.submit(
+                                        id: widget.id,
+                                        returnDate: returnDate,
+                                        returnProofPath: _file!.path));
+                              }
+                            : null),
+                  ]));
+            })));
   }
 }

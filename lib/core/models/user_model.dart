@@ -10,6 +10,7 @@ class UserModel with _$UserModel {
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'region_id') required int regionId,
     @JsonKey(name: 'name') required String name,
+    @JsonKey(name: 'email') String? email,
     @JsonKey(name: 'role') required String role,
   }) = _UserModel;
 

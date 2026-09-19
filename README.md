@@ -47,5 +47,5 @@ flutter pub get
 
 ## ▶️ Running 
 ```bash
-flutter run --flavor dev --target lib/main_dev.dart --dart-define-from-file=env-dev.json
+flutter run --flavor development --target lib/main_dev.dart --dart-define-from-file=env-dev.json
 ```
